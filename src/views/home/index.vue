@@ -11,7 +11,6 @@
             </el-col>
             <!-- 右 -->
             <el-col :span="13">
-                <!-- autoplay -->
                 <video src="../../assets/video/home_video.mp4" style="width: 100%;border-radius: 16px;" loop autoplay
                     muted></video>
             </el-col>
@@ -54,15 +53,11 @@ import { ref } from 'vue';
         .top {
             flex: 7;
         }
-
-
-
     }
 
     .row_two {
 
-        .right {
-        }
+        .right {}
 
     }
 }
@@ -72,5 +67,4 @@ import { ref } from 'vue';
     margin-left: -10px;
     margin-right: -10px;
 }
-
 </style>

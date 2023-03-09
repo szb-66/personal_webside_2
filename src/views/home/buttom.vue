@@ -1,19 +1,38 @@
 <template>
     <div class="bottom">
-        <div v-for="i in 3" :key="i" :class="['item', { 'item2': activeIndex === i }]" @mouseover="activeIndex = i"
-            @mouseleave="activeIndex = 0">
-            <div class="text">设计知识库</div>
+        <div v-for="(item, i) in data" :key="i" :class="['item', { 'item2': activeIndex === i }]"
+            @mouseover="activeIndex = i" @mouseleave="activeIndex = -1" :style="{ background: item.bgc }">
+            <div class="text">{{ item.title }}</div>
             <div class="xian"></div>
-            <img src="../../assets/images/sheJi.png" class="img">
-
+            <img :src="item.imgSrc" class="img">
         </div>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-const activeIndex = ref(0);
+const activeIndex = ref(-1);
 
+const data = [
+    {
+        title: "设计知识库",
+        imgSrc: "src/assets/images/sheJi.png",
+        bgc: "linear-gradient(90deg, #358CFF 0%, #25A7FF 100%)",
+        url: ""
+    },
+    {
+        title: "开发知识库",
+        imgSrc: "src/assets/images/kaiFa.png",
+        bgc: "linear-gradient(90deg, #FF6854 0%, #FF9147 100%)",
+        url: ""
+    },
+    {
+        title: "最新发布",
+        imgSrc: "src/assets/images/recently.png",
+        bgc: "linear-gradient(90deg, #18E7AF 0%, #1BE9CB 100%)",
+        url: ""
+    },
+]
 
 </script>
 
@@ -25,7 +44,7 @@ const activeIndex = ref(0);
 
     .item {
         flex: 1;
-        background: linear-gradient(90deg, #358CFF 0%, #25A7FF 100%);
+        // background: linear-gradient(90deg, #358CFF 0%, #25A7FF 100%);
         transition: all 0.5s cubic-bezier(0.445, 1.05, 0.55, 1.15);
         border-radius: 16px;
         padding: 1rem;
@@ -44,6 +63,10 @@ const activeIndex = ref(0);
             color: white;
             text-align: left;
             z-index: 2;
+            // 文字不换行，超出部分显示省略号
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .xian {
@@ -59,7 +82,7 @@ const activeIndex = ref(0);
             right: -8.72%;
             top: 16.38%;
             transform: rotate(15deg);
-            filter: blur(4px); 
+            filter: blur(4px);
             height: 100%;
             transition: all 0.5s cubic-bezier(0.445, 1.05, 0.55, 1.15);
         }
@@ -68,12 +91,13 @@ const activeIndex = ref(0);
     .item2 {
         flex: 2;
         cursor: pointer;
-        .img{
+
+        .img {
             right: 8.72%;
             top: 10%;
             height: 80%;
             transform: rotate(0);
-            filter: blur(0); 
+            filter: blur(0);
         }
     }
 
