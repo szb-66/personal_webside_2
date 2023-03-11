@@ -30,25 +30,13 @@ defineProps({
 </script>
   
 <style lang="less" scoped>
+
 .card {
     border-radius: 16px;
-    border: 1px solid #e3e8f7;
+    border: 1px solid var(--border);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-
-    &:hover {
-        border: 1px solid #576BF1;
-        box-shadow: 0px 0px 20px rgba(66, 90, 239, 0.08);
-
-        h2{
-            color: #0A23CB;
-        }
-        .cover img {
-            transform: scale(1.05);
-            transform-origin: center;
-        }
-    }
-
+    color: var(--text-3);
     .cover {
         overflow: hidden;
         border-radius: 16px 16px 0 0;
@@ -59,8 +47,6 @@ defineProps({
             height: auto;
             // 缓入缓出动画
             transition: all 0.4s ease-in-out;
-
-
         }
     }
     .content {
@@ -72,7 +58,8 @@ defineProps({
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 1rem;
-            // transition: all 0.5s ease-in;
+            transition: all 0.1s ease-in;
+            color: var(--text-1);
         }
     
         .info {
@@ -83,6 +70,20 @@ defineProps({
     
         .tags span {
             margin-right: 0.5rem;
+        }
+    }
+    &:hover {
+        border: 1px solid var(--blue);
+        box-shadow: var(--box-shadow);
+
+        h2{
+            color: var(--blue);
+
+        }
+
+        .cover img {
+            transform: scale(1.05);
+            transform-origin: center;
         }
     }
 }

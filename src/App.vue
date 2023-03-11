@@ -19,7 +19,5 @@ import Menu from './components/menu.vue'
 .main {
     max-width: 1440px;
     margin: 0 auto;
-    text-align: center;
 }
-
 </style>

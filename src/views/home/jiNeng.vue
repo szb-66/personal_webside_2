@@ -75,7 +75,7 @@ let isHovering = ref(false);
         padding: 0 40px;
         width: 200%;
         height: 100%;
-        background-color: rgba(87, 107, 241, 0.9);
+        background-color: var(--blue-op90);
         backdrop-filter: blur(8px);
         z-index: 1;
         pointer-events: none;

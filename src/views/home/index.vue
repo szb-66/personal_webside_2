@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <!-- 第一行 -->
-        <el-row :gutter="20">
+        <el-row :gutter="16">
             <!-- 左 -->
             <el-col :span="11" class="topBox">
                 <!-- 上 -->
@@ -16,7 +16,7 @@
             </el-col>
         </el-row>
         <!-- 第二行 -->
-        <el-row :gutter="20" class="row_two">
+        <el-row :gutter="16" class="row_two">
             <el-col :span="19" class="left">
                 <!-- 导航 -->
                 <Nav></Nav>
@@ -29,26 +29,29 @@
             </el-col>
         </el-row>
     </div>
+    <Footer></Footer>
 </template>
 
 <script setup>
 import jiNeng from './jiNeng.vue'
-import Buttom from './buttom.vue'
+import Buttom from './bottom.vue'
 import Nav from './nav.vue'
 import About from './about.vue'
-import { ref } from 'vue';
+import Footer from './footer.vue'
 
 </script>
 
 <style lang="less" scoped>
 .main {
-    margin-top: 70px;
     padding: 0 1.5rem;
+
+    max-width: 1440px;
+    margin: 70px auto 0 auto;
 
     .topBox {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 1rem;
 
         .top {
             flex: 7;
@@ -60,11 +63,13 @@ import { ref } from 'vue';
         .right {}
 
     }
+    .el-row {
+        margin-bottom: 1rem;
+        margin-left: -10px;
+        margin-right: -10px;
+    }
 }
 
-.el-row {
-    margin-bottom: 20px;
-    margin-left: -10px;
-    margin-right: -10px;
-}
+
+
 </style>

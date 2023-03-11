@@ -46,7 +46,7 @@ window.addEventListener('scroll', () => {
     display: flex;
     align-items: center;
     z-index: 2;
-    background-color: #fff;
+    background-color: var(--white);
     width: 100vw;
 
     position: fixed;
@@ -75,7 +75,19 @@ window.addEventListener('scroll', () => {
             gap: 8px;
 
             button {
+                border-radius: 20px;
+                border: 1px solid transparent;
+                padding: 0.4em 1em;
+                font-size: 1em;
                 font-weight: 600;
+                cursor: pointer;
+                transition: all 0.25s;
+                background: rgba(255, 255, 255, 0);
+            }
+
+            button:hover {
+                background-color: var(--blue);
+                color: var(--white);
             }
         }
 
@@ -109,4 +121,6 @@ window.addEventListener('scroll', () => {
     .main {
         width: 1440px;
     }
-}</style>
+}
+
+</style>

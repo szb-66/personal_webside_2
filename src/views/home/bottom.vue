@@ -40,13 +40,13 @@ const data = [
 .bottom {
     flex: 3;
     display: flex;
-    gap: 20px;
+    gap: 1rem;
 
     .item {
         flex: 1;
         // background: linear-gradient(90deg, #358CFF 0%, #25A7FF 100%);
         transition: all 0.5s cubic-bezier(0.445, 1.05, 0.55, 1.15);
-        border-radius: 16px;
+        border-radius: 1rem;
         padding: 1rem;
 
         display: flex;
