@@ -1,127 +1,97 @@
 <template>
-    <div class="projectExp">
-        <!-- 标题 -->
-        <div class="exp-title">
-            <div class="zhaungshi"></div>
-            <div class="title">项目经历</div>
-        </div>
-        <!-- 内容卡片 -->
-        <div v-for="(item, index) in projectExp">
-            <!-- 单个项目信息 -->
-            <div class="company">
-                <div class="company-and-time">
-                    <div class="company-name">{{ item.name }}</div>
-                    <div class="company-time">{{ item.time }}</div>
-                </div>
-                <div class="fuzeneirong">负责内容</div>
-                <div class="company-duty">
-                    <div v-for="i in item.content">{{ i }}</div>
-                </div>
-                <hr color='#EAEAEA' v-if="xiantiao_project(index)">
-            </div>
-        </div>
+  <div class="objectExp">
+    <!-- 标题 -->
+    <div class="exp-title">
+      <div class="zhaungshi"></div>
+      <div class="titleAll">项目经历</div>
     </div>
+    <div v-for="(item, index) in items" :key="index" @mouseenter="expand(index)">
+      <div class="title"
+        :style="{ background: index % 3 === 0 ? 'linear-gradient(95.87deg, #2F7AFF -1.21%, #02D0FF 100%)' : index % 3 === 1 ? 'linear-gradient(94.84deg, #FF5472 0%, #FF7D06 100%)' : 'linear-gradient(90deg, #07CE98 0%, #06E4C4 100%)' }">
+        <strong>{{ item.title }}</strong>
+      </div>
+      <div class="content" :style="{ height: item.expanded ? '10rem' : '0' }" @scroll="handleScroll">
+        <div v-for="(contentItem, contentIndex) in item.content" :key="contentIndex">{{ contentItem }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
-
-
-
 <script setup>
-// 引入json文件
+import { ref } from 'vue'
 import projectExp from '../../assets/data/projectExp.json'
+const items = ref(projectExp)
 
-// 最后一条线条隐藏
-function xiantiao_project(index) {
-    if (index < projectExp.length - 1) {
-        return true
+const expand = (index) => {
+  items.value[index].expanded = true
+  items.value.forEach((item, i) => {
+    if (i !== index) {
+      item.expanded = false
     }
-    else {
-        return false
-    }
+  })
 }
+// 默认只展开第一个
+expand(0)
+
 
 </script>
 
+<style scoped lang="less">
+.objectExp {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background-color: white;
+  height: 100%;
 
+  .exp-title {
+    display: flex;
+    gap: 12px;
+    margin: 2rem 1rem 1rem 2rem;
 
-
-
-
-<style lang="less" scoped>
-.projectExp {
-    background-color: white;
-    border-radius: 12px;
-    padding: 30px;
-
-    .exp-title {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 32px;
-
-        .title {
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 20px;
-        }
-
-        .zhaungshi {
-            width: 4px;
-            height: 20px;
-            background: #3278FF;
-            border-radius: 32px;
-        }
+    .titleAll {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 20px;
     }
 
-    .company {
-        .company-and-time {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .company-name {
-                font-size: 18px;
-                font-weight: 600;
-            }
-
-            .company-time {
-                color: #666666;
-                font-size: 14px;
-            }
-        }
-
-        .duty {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-top: 8px;
-
-            .yuan {
-                width: 8px;
-                height: 8px;
-                background-color: #3278FF;
-                border-radius: 8px;
-            }
-        }
-
-        .fuzeneirong {
-            font-weight: 600;
-            color: #333;
-            margin-top: 16px;
-        }
-
-        .company-duty {
-            line-height: 1.5em;
-            color: #666666;
-            margin-top: 8px;
-
-        }
-
-        hr {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+    .zhaungshi {
+      width: 4px;
+      height: 20px;
+      background: #3278FF;
+      border-radius: 32px;
     }
+  }
 
+  .title {
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 2rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    color: var(--white);
+    // 手指
+    cursor: pointer;
+  }
 
+  .content {
+    height: 0;
+    overflow: auto;
+    transition: all 0.5s;
+
+    // 隐藏部分添加滚动条
+    div {
+      padding: 0.2rem 2rem;
+      line-height: 150%;
+      color: var(--text-2);
+    }
+  }
+}
+
+/* 隐藏默认滚动条 */
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

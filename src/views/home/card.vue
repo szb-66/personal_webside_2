@@ -37,6 +37,7 @@ defineProps({
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     color: var(--text-3);
+    background-color: var(--white);
     .cover {
         overflow: hidden;
         border-radius: 16px 16px 0 0;

@@ -28,6 +28,9 @@
                 <!-- 标签 -->
             </el-col>
         </el-row>
+        <!-- <iframe id="myVideo" src="https://player.bilibili.com/player.html?aid=52761282&bvid=BV1r441177ay&cid=92329566&page=1&high_quality=1&autoplay=1&loop=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" auto> </iframe> -->
+        <!-- <iframe src="//player.bilibili.com/player.html?aid=52761282&bvid=BV1r441177ay&cid=92329566&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
+        <!-- <video preload="auto" src="blob:https://www.bilibili.com/ceb91e27-3e60-4d9c-8ca1-dd615cd8ec81" loop autoplay></video> -->
     </div>
     <Footer></Footer>
 </template>

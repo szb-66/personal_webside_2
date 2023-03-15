@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <el-row class="row" :gutter="16">
+        <el-row class="row1" :gutter="16">
             <el-col :span="15" class="col">
                 <Me></Me>
             </el-col>
@@ -40,10 +40,14 @@
                 <ZhaoPian></ZhaoPian>
             </el-col>
         </el-row>
-        <WorkExp class="workExp"></WorkExp>
-        <projectExp></projectExp>
-
-
+        <el-row class="row6" :gutter="16">
+            <el-col :span="12" class="col">
+                <objectExp></objectExp>
+            </el-col>
+            <el-col :span="12" class="col">
+                <WorkExp></WorkExp>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -59,7 +63,7 @@ import TeChang from './teChang.vue'
 import XinXi from './xinXi/xinXi.vue'
 import ZhaoPian from './zhaoPian.vue'
 import WorkExp from './workExp.vue'
-import projectExp from './projectExp.vue'
+import objectExp from './projectExp.vue'
 
 </script>
 
@@ -68,30 +72,39 @@ import projectExp from './projectExp.vue'
     margin-top: 70px;
     padding: 0 1.5rem;
 
-    .row {
+    .col{
+        height: 100%;
+    }
+    .row1 {
         margin-bottom: 1rem;
         height: 200px;
         display: flex;
     }
-    .row2{
+
+    .row2 {
         margin-bottom: 1rem;
         height: 400px;
 
     }
-    .row3{
+
+    .row3 {
         margin-bottom: 1rem;
         height: 260px;
     }
-    .row4{
+
+    .row4 {
         margin-bottom: 1rem;
         height: 260px;
     }
-    .row5{
+
+    .row5 {
         margin-bottom: 1rem;
         height: 400px;
     }
-    .workExp{
+    .row6 {
         margin-bottom: 1rem;
+        height: 616px;
     }
+
 }
 </style>
