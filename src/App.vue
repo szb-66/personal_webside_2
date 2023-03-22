@@ -1,6 +1,8 @@
 <template>
     <Menu></Menu>
     <router-view class="main"></router-view>
+    <Footer></Footer>
+    
 </template>
 
 
@@ -8,6 +10,7 @@
 
 <script setup>
 import Menu from './components/menu.vue'
+import Footer from './components/footer.vue'
 
 
 </script>

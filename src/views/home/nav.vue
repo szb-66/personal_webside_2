@@ -6,7 +6,7 @@
         </ul>
         <el-row :gutter="16" class="content">
             <el-col :span="12" v-for="(article, index) in articleList" :key="index" style="margin-bottom: 1rem;">
-                <ArticleCard  :article="article">
+                <ArticleCard  :article="article" class="card">
                 </ArticleCard>
             </el-col>
         </el-row>
@@ -14,14 +14,14 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 // import articleList from '../../assets/data/articleList.json'
 import ArticleCard from './card.vue'
 import axios from 'axios'
 
 // 获取文章信息
 const types = ref(null);
-const articleList = ref(null);
+const articleList = ref([]);
 // 选中的id
 const currentModule = ref(0)
 
@@ -33,7 +33,7 @@ async function getTypes() {
     try {
         const response = await axios.get('http://localhost:3000/api/articles/types');
         types.value = response.data;
-        console.log('获取类型成功：', response.data);
+        // console.log('获取类型成功：', response.data);
     } catch (error) {
         console.error('获取类型失败：', error);
     }
@@ -47,21 +47,29 @@ async function getArticles(type,index) {
             }
         });
         articleList.value = response.data;
-        console.log('获取文章成功：', response.data);
+        // console.log('获取文章成功：', response.data);
     } catch (error) {
         console.error('获取文章失败：', error);
     }
-    currentModule.value = index
+    if (types.value !== null) {
+        currentModule.value = index
+    }
 }
 
+// 刷新或进入页面自动获取已经选中的type数据
+watch(() => types.value, (newValue) => {
+    if (newValue !== null) {
+        getArticles(newValue[0], 0);
+    }
+});
 
-const currentArticles = computed(() => modules[currentModule.value].articles)
+/* const currentArticles = computed(() => modules[currentModule.value].articles) */
 
-const modules = [
+/* const modules = [
     { name: '项目复盘', articles: articleList.module1 },
     { name: '插画设计', articles: articleList.module2 },
     { name: '3D设计', articles: articleList.module3 }
-]
+] */
 </script>
 
 <style lang="less" scoped>
