@@ -86,7 +86,7 @@ const rotateY = ref(0);
 
 const onMouseMove = (e) => {
     const rect = document.getElementById("home-about-card").getBoundingClientRect();
-    console.log(rect);
+    // console.log(rect);
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     // 旋转角度，修改后面的变量可以控制旋转的幅度

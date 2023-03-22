@@ -1,11 +1,11 @@
 <template>
     <div>
         <ul class="nav">
-            <li v-for="(module, index) in modules" :key="index" @click="currentModule = index"
-                :class="{ active: currentModule === index }">{{ module.name }}</li>
+            <li v-for="(type, index) in types" :key="index"  @click="getArticles(type,index)"
+                :class="{ active: currentModule === index }">{{ type }}</li>
         </ul>
         <el-row :gutter="16" class="content">
-            <el-col :span="12" v-for="(article, index) in currentArticles" :key="index" style="margin-bottom: 1rem;">
+            <el-col :span="12" v-for="(article, index) in articleList" :key="index" style="margin-bottom: 1rem;">
                 <ArticleCard  :article="article">
                 </ArticleCard>
             </el-col>
@@ -14,19 +14,54 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import articleList from '../../assets/data/articleList.json'
+import { ref, computed, onMounted } from 'vue'
+// import articleList from '../../assets/data/articleList.json'
 import ArticleCard from './card.vue'
+import axios from 'axios'
+
+// 获取文章信息
+const types = ref(null);
+const articleList = ref(null);
+// 选中的id
+const currentModule = ref(0)
+
+onMounted(() => {
+    getTypes();
+});
+// 获取分类
+async function getTypes() {
+    try {
+        const response = await axios.get('http://localhost:3000/api/articles/types');
+        types.value = response.data;
+        console.log('获取类型成功：', response.data);
+    } catch (error) {
+        console.error('获取类型失败：', error);
+    }
+}
+// 获取分类中的文章信息
+async function getArticles(type,index) {
+    try {
+        const response = await axios.get('http://localhost:3000/api/articles/info', {
+            params: {
+                type
+            }
+        });
+        articleList.value = response.data;
+        console.log('获取文章成功：', response.data);
+    } catch (error) {
+        console.error('获取文章失败：', error);
+    }
+    currentModule.value = index
+}
+
+
+const currentArticles = computed(() => modules[currentModule.value].articles)
 
 const modules = [
     { name: '项目复盘', articles: articleList.module1 },
     { name: '插画设计', articles: articleList.module2 },
     { name: '3D设计', articles: articleList.module3 }
 ]
-
-const currentModule = ref(0)
-const currentArticles = computed(() => modules[currentModule.value].articles)
-
 </script>
 
 <style lang="less" scoped>

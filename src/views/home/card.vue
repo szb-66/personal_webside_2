@@ -2,7 +2,7 @@
     <div class="card">
         <!-- 封面 -->
         <div class="cover">
-            <img :src="article.cover" alt="封面图片" />
+            <img :src="article.imgUrl" alt="封面图片" />
         </div>
         <!-- 文字内容 -->
         <div class="content">
@@ -13,7 +13,7 @@
                     <span v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
                 </div>
                 <!-- 发布日期 -->
-                <div class="date">{{ article.date }}</div>
+                <div class="date">{{ article.created_at }}</div>
             </div>
         </div>
     </div>
