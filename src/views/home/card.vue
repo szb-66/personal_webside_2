@@ -1,8 +1,8 @@
 <template>
-    <div class="card">
+    <div class="card" @click="goContent">
         <!-- 封面 -->
         <div class="cover">
-            <img :src="article.imgUrl" alt="封面图片" />
+            <img :src="article.cover_img_url" alt="封面图片" />
         </div>
         <!-- 文字内容 -->
         <div class="content">
@@ -21,11 +21,23 @@
   
 <script setup>
 import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 // 获取父级传过来的卡片数据
-defineProps({
+const props = defineProps({
     article: Object
 })
+
+// 跳转到文章详情页
+const goContent = () => {
+    router.push({
+        name: 'content',
+        params: {
+            id: props.article.id
+        }
+    })
+}
 
 </script>
   

@@ -65,11 +65,7 @@ watch(() => types.value, (newValue) => {
 
 /* const currentArticles = computed(() => modules[currentModule.value].articles) */
 
-/* const modules = [
-    { name: '项目复盘', articles: articleList.module1 },
-    { name: '插画设计', articles: articleList.module2 },
-    { name: '3D设计', articles: articleList.module3 }
-] */
+
 </script>
 
 <style lang="less" scoped>
