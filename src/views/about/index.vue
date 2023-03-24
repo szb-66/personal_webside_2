@@ -107,4 +107,5 @@ import objectExp from './projectExp.vue'
     }
 
 }
+
 </style>

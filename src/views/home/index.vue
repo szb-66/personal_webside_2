@@ -39,7 +39,7 @@
 import jiNeng from './jiNeng.vue'
 import Buttom from './bottom.vue'
 import Nav from './nav.vue'
-import About from './about.vue'
+import About from '../../components/about.vue'
 
 
 </script>
