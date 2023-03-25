@@ -20,7 +20,7 @@
             </el-col>
             <el-col :span="5">
                 <About></About>
-                <Catalog :data="catalog" v-if="catalog.length > 0 ? true : false" 
+                <Catalog :data="catalog" v-if="catalog.length > 0 ? true : false" :visibleSectionId="visibleSectionId"
                     ></Catalog>
             </el-col>
         </el-row>
@@ -35,7 +35,7 @@ import { useRoute } from 'vue-router'
 import { ref, watch, onMounted, computed, provide, queuePostFlushCb } from 'vue'
 import TitleBar from './TitleBar.vue'
 import About from '../../components/about.vue'
-import Catalog from './Catalog.vue'
+import Catalog from './Catalog2.vue'
 
 // 接受路由传过来的id
 const route = useRoute()
@@ -114,12 +114,12 @@ const processContent = (content, catalog) => {
 
 // 判断当前显示的标题函数
 const handleScroll = () => {
-    const sections = document.querySelectorAll('h1,h2,h3,h4,h5,h6'); // 根据您的实际内容元素选择器进行更改
+    const sections = document.querySelectorAll('h1,h2'); // 根据您的实际内容元素选择器进行更改
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     let currentVisibleSection = null;
 
     for (const section of sections) {
-        if (section.offsetTop <= scrollTop) {
+        if (section.offsetTop <= scrollTop-240+window.innerHeight / 2) {
             currentVisibleSection = section;
         } else {
             break;

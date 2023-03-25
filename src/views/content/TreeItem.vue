@@ -1,6 +1,7 @@
 <template>
     <div class="item">
-        <div class="item-title" @click="toggleExpand(item)">
+        <!-- 标题 -->
+        <div class="item-title" @click="toggleExpand(item)" :class="{ 'hover': item.isExpanded }">
             <span>
                 {{ item.text }}
             </span>
@@ -13,22 +14,23 @@
                 </template>
             </el-icon>
         </div>
-        <div class="item-content" v-if="item.children && item.isExpanded">
-            <tree-item v-for="child in item.children" :key="child.id" :item="child"
-                @toggle-expand="emitToggleExpand($event)"></tree-item>
+        <!-- 子项区域 -->
+        <div class="item-content" v-if="item.children && item.isExpanded || item.parentShow">
+            <tree-item v-for="child in item.children" :key="child.id" :item="child" ref="child"></tree-item>
         </div>
     </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, inject,watch,ref } from 'vue';
+import { defineProps, defineEmits, inject, watch, ref, reactive } from 'vue';
 import { ElIcon } from 'element-plus';
 import { ArrowUp, ArrowDown } from '@element-plus/icons-vue';
-// import { watch } from 'fs';
 
 const props = defineProps({
     item: Object,
 });
+// 将 item 对象变为响应式
+const item = reactive(props.item);
 
 const emit = defineEmits(['toggle-expand']);
 
@@ -37,24 +39,24 @@ const toggleExpand = (item) => {
     item.isExpanded = !item.isExpanded;
 };
 
+// 依赖注入
 const visibleSectionId = inject('visibleSectionId')
 
-// item实例
-const itemRef = ref(props.item);
-
+const child = ref();
 // 事件监听，监听visibleSectionId的变化，如果变化的值和item的id相同，则展开，否则收起
 watch(
-  () => visibleSectionId.value,
-  (newVisibleSectionId) => {
-    if (newVisibleSectionId) {
-      if (itemRef.value.id === newVisibleSectionId) {
-        itemRef.value.isExpanded = true;
-      } else {
-        itemRef.value.isExpanded = false;
-      }
+    () => visibleSectionId.value,
+    (newVisibleSectionId) => {
+        if (newVisibleSectionId) {
+            if (item.id === newVisibleSectionId) {
+                item.isExpanded = true;
+            } else {
+                item.parentShow = false;
+            }
+        }
     }
-  }
 );
+
 </script>
 
 
@@ -72,7 +74,7 @@ watch(
 .item {
     // padding: 1rem 0;
     // line-height: 150%;
-    
+
     .item-title {
         display: flex;
         align-items: center;
@@ -82,18 +84,25 @@ watch(
         // 过渡
         transition: all 0.3s;
         gap: 1rem;
-        span{
+
+        span {
             // 不换行，超出部分显示省略号
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        &:hover{
+
+        &:hover {
             cursor: pointer;
             background-color: var(--blue);
             color: var(--white);
         }
     }
+}
+
+.hover {
+    background-color: var(--blue);
+    color: var(--white);
 }
 </style>
   

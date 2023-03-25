@@ -25,9 +25,8 @@ const props = defineProps({
 const fixedDiv = ref(null);
 const isFixed = ref(false);
 // 获取fixedDiv到顶部的距离
-
 onMounted(function(){
-    let divOffsetTop = fixedDiv.value.offsetTop+100;
+    let divOffsetTop = fixedDiv.value.offsetTop+180;
     const onScroll = () => {
         if (!fixedDiv.value) return;
         // 获取滚动距离
@@ -40,7 +39,6 @@ onMounted(function(){
     }
     window.addEventListener("scroll", onScroll)
 })
-
 // 让浮动菜单的宽度和左右位置保持不变
 const fixedStyle = computed(() => {
   if (isFixed.value && fixedDiv.value) {
@@ -56,6 +54,7 @@ const fixedStyle = computed(() => {
     return {};
   }
 });
+
 
 </script>
 
