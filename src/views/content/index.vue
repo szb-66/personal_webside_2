@@ -1,29 +1,29 @@
 <template>
-        <TitleBar>
-            <!-- 标题、tags、发布时间、类型 -->
-            <div class="article-info">
-                <h1>{{ article.title }}</h1>
-                <div class="tags">
-                    <span v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
-                </div>
-                <div class="publish-time">{{ article.created_at }}</div>
-                <div class="type">{{ article.type }}</div>
+    <TitleBar>
+        <!-- 标题、tags、发布时间、类型 -->
+        <div class="article-info">
+            <h1>{{ article.title }}</h1>
+            <div class="tags">
+                <span v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
             </div>
-        </TitleBar>
-        <div class="main">
-            <!-- el栅格系统 -->
-            <el-row :gutter="16">
-                <el-col :span="19">
-                    <div class="content_bg">
-                        <div v-html="article.content" class="content" @scroll="onScroll" ref="content"></div>
-                    </div>
-                </el-col>
-                <el-col :span="5">
-                    <About></About>
-                    <Catalog :id="id"></Catalog>
-                </el-col>
-            </el-row>
+            <div class="publish-time">{{ article.created_at }}</div>
+            <div class="type">{{ article.type }}</div>
         </div>
+    </TitleBar>
+    <div class="main">
+        <!-- el栅格系统 -->
+        <el-row :gutter="16">
+            <el-col :span="19">
+                <div class="content_bg">
+                    <div v-html="article.content" class="content" @scroll="onScroll" ref="content"></div>
+                </div>
+            </el-col>
+            <el-col :span="5">
+                <About></About>
+                <Catalog :data="catalog"></Catalog>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
 
@@ -31,7 +31,7 @@
 <script setup>
 import axios from 'axios';
 import { useRoute } from 'vue-router'
-import { ref, watch } from 'vue'
+import { ref, watch,onMounted } from 'vue'
 import TitleBar from './TitleBar.vue'
 import About from '../../components/about.vue'
 import Catalog from './Catalog.vue'
@@ -44,24 +44,39 @@ const id = route.params.id
 
 // 文章
 const article = ref({})
+// 目录
+const catalog = ref([])
 
-// 发送请求获取文章详情
-axios.get('http://localhost:3000/api/articles/' + id)
-    .then(res => {
-        // console.log(res.data)
-        article.value = res.data
-    })
-    .catch(err => {
-        console.log(err)
-    })
-// 发送请求文章目录
-axios.get('http://localhost:3000/api/articles/catalog/' + id)
-    .then(res => {
-        // console.log(res.data[0])
-    })
-    .catch(err => {
-        console.log(err)
-    })
+onMounted(async () => {
+    try {
+        const response = await axios.get(`http://localhost:3000/api/articles/catalog/${id}`);
+        catalog.value = buildTree(response.data);
+        // console.log(catalog.value);
+        const res = await axios.get(`http://localhost:3000/api/articles/${id}`);
+        article.value = res.data;
+    } catch (error) {
+        console.error('数据请求出错：', error);
+    }
+});
+
+// 递归构建树
+const buildTree = (data, parentLevel = 0) => {
+    const result = [];
+
+    while (data.length > 0) {
+        const item = data.shift();
+
+        if (item.level === parentLevel + 1) {
+            result.push(item);
+            item.children = buildTree(data, item.level);
+        } else {
+            data.unshift(item);
+            break;
+        }
+    }
+
+    return result;
+};
 
 
 </script>
