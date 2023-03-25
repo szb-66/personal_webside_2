@@ -6,7 +6,7 @@
         </div>
         <!-- 目录内容 -->
         <div class="content">
-            <tree-item v-for="item in data" :key="item.id" :item="item" @toggle-expand="toggleExpand(item)"></tree-item>
+            <tree-item v-for="item in data" :key="item.id" :item="item"></tree-item>
         </div>
     </div>
 </template>
@@ -20,11 +20,6 @@ const props = defineProps({
     data: Array,
     // visibleSectionId: String,
 })
-
-// 目录显示开关
-const toggleExpand = (item) => {
-    item.isExpanded = !item.isExpanded;
-}
 
 // 智能浮动
 const fixedDiv = ref(null);

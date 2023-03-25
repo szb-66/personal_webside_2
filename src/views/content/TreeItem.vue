@@ -32,6 +32,7 @@ const props = defineProps({
 
 const emit = defineEmits(['toggle-expand']);
 
+// 目录显示开关
 const toggleExpand = (item) => {
     item.isExpanded = !item.isExpanded;
 };
@@ -41,7 +42,7 @@ const visibleSectionId = inject('visibleSectionId')
 // item实例
 const itemRef = ref(props.item);
 
-// 事件监听
+// 事件监听，监听visibleSectionId的变化，如果变化的值和item的id相同，则展开，否则收起
 watch(
   () => visibleSectionId.value,
   (newVisibleSectionId) => {
