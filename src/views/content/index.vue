@@ -15,12 +15,13 @@
         <el-row :gutter="16">
             <el-col :span="19">
                 <div class="content_bg">
-                    <div v-html="article.content" class="content" @scroll="onScroll" ref="content"></div>
+                    <div v-html="processedContent.value" class="content" @scroll="onScroll" ref="content"></div>
                 </div>
             </el-col>
             <el-col :span="5">
                 <About></About>
-                <Catalog :data="catalog"></Catalog>
+                <Catalog :data="catalog" v-if="catalog.length > 0 ? true : false" 
+                    ></Catalog>
             </el-col>
         </el-row>
     </div>
@@ -31,12 +32,10 @@
 <script setup>
 import axios from 'axios';
 import { useRoute } from 'vue-router'
-import { ref, watch,onMounted } from 'vue'
+import { ref, watch, onMounted, computed, provide, queuePostFlushCb } from 'vue'
 import TitleBar from './TitleBar.vue'
 import About from '../../components/about.vue'
 import Catalog from './Catalog.vue'
-
-
 
 // 接受路由传过来的id
 const route = useRoute()
@@ -46,20 +45,34 @@ const id = route.params.id
 const article = ref({})
 // 目录
 const catalog = ref([])
+// 显示的文章内容
+const processedContent = ref('loading')
 
+// 当前显示的标题id
+const visibleSectionId = ref(null);
+// 依赖注入
+provide('visibleSectionId', visibleSectionId)
+
+
+
+// 异步数据请求
 onMounted(async () => {
-    try {
-        const response = await axios.get(`http://localhost:3000/api/articles/catalog/${id}`);
-        catalog.value = buildTree(response.data);
-        // console.log(catalog.value);
-        const res = await axios.get(`http://localhost:3000/api/articles/${id}`);
-        article.value = res.data;
-    } catch (error) {
-        console.error('数据请求出错：', error);
-    }
+    const response = await axios.get(`http://localhost:3000/api/articles/catalog/${id}`);
+    // 目录数据
+    catalog.value = buildTree(response.data);
+
+    const res = await axios.get(`http://localhost:3000/api/articles/${id}`);
+    // 文章数据，标题、内容等
+    article.value = res.data;
+
+    // 把数据中的内容替换成标题带id的内容
+    processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
+    // 监听滚动事件判断当前标题
+    window.addEventListener('scroll', handleScroll);
 });
 
-// 递归构建树
+
+// 递归构建树函数
 const buildTree = (data, parentLevel = 0) => {
     const result = [];
 
@@ -77,6 +90,49 @@ const buildTree = (data, parentLevel = 0) => {
 
     return result;
 };
+
+// 将id放入内容的函数
+const processContent = (content, catalog) => {
+    if (!content || !catalog) {
+        return content;
+    }
+    let modifiedContent = content;
+    let catalogItems = catalog.flatMap(item => {
+        if (item.children) {
+            return [item, ...item.children];
+        } else {
+            return item;
+        }
+    });
+    for (const item of catalogItems) {
+        const tagRegex = new RegExp(`<h${item.level}[^>]*>${item.text}<`, 'i');
+        modifiedContent = modifiedContent.replace(tagRegex, `<h${item.level} id="${item.id}">${item.text}<`);
+    }
+
+    return modifiedContent;
+};
+
+// 判断当前显示的标题函数
+const handleScroll = () => {
+    const sections = document.querySelectorAll('h1,h2,h3,h4,h5,h6'); // 根据您的实际内容元素选择器进行更改
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let currentVisibleSection = null;
+
+    for (const section of sections) {
+        if (section.offsetTop <= scrollTop) {
+            currentVisibleSection = section;
+        } else {
+            break;
+        }
+    }
+
+    if (currentVisibleSection) {
+        visibleSectionId.value = currentVisibleSection.id;
+    } else {
+        visibleSectionId.value = null;
+    }
+};
+
 
 
 </script>
@@ -150,5 +206,7 @@ const buildTree = (data, parentLevel = 0) => {
             font-weight: 600;
         }
     }
+
+
 }
 </style>

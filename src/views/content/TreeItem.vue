@@ -1,7 +1,9 @@
 <template>
     <div class="item">
         <div class="item-title" @click="toggleExpand(item)">
-            {{ item.text }}
+            <span>
+                {{ item.text }}
+            </span>
             <el-icon v-if="item.children && item.children.length > 0" :size="14" color="var(--text-3)">
                 <template v-if="item.isExpanded">
                     <ArrowUp />
@@ -17,11 +19,12 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, inject,watch,ref } from 'vue';
 import { ElIcon } from 'element-plus';
 import { ArrowUp, ArrowDown } from '@element-plus/icons-vue';
+// import { watch } from 'fs';
 
 const props = defineProps({
     item: Object,
@@ -33,17 +36,63 @@ const toggleExpand = (item) => {
     item.isExpanded = !item.isExpanded;
 };
 
+const visibleSectionId = inject('visibleSectionId')
+
+// item实例
+const itemRef = ref(props.item);
+
+// 事件监听
+watch(
+  () => visibleSectionId.value,
+  (newVisibleSectionId) => {
+    if (newVisibleSectionId) {
+      if (itemRef.value.id === newVisibleSectionId) {
+        itemRef.value.isExpanded = true;
+      } else {
+        itemRef.value.isExpanded = false;
+      }
+    }
+  }
+);
 </script>
 
-<style scoped>
-.item {
-    margin: 2rem 0;
-}
 
-.item-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+
+
+
+
+
+
+
+
+
+<style lang="less" scoped>
+.item {
+    // padding: 1rem 0;
+    // line-height: 150%;
+    
+    .item-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        border-radius: 0.8rem;
+        // 过渡
+        transition: all 0.3s;
+        gap: 1rem;
+        span{
+            // 不换行，超出部分显示省略号
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &:hover{
+            cursor: pointer;
+            background-color: var(--blue);
+            color: var(--white);
+        }
+    }
 }
 </style>
   
