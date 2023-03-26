@@ -1,6 +1,6 @@
 <template>
     <Menu></Menu>
-    <router-view class="main"></router-view>
+    <router-view></router-view>
     <Footer></Footer>
     
 </template>
@@ -19,8 +19,8 @@ import Footer from './components/footer.vue'
 
 
 <style lang="less" scoped>
-.main {
+/* .main {
     max-width: 1440px;
     margin: 0 auto;
-}
+} */
 </style>

@@ -17,6 +17,11 @@ const routes = [
     name: 'content',
     component: () => import('../views/content/index.vue')
   },
+  {
+    path: '/ArticleList',
+    name: 'ArticleList',
+    component: () => import('../views/ArticleList/index.vue')
+  },
 ]
 
 const router = createRouter({

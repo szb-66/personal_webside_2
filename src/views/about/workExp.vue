@@ -77,7 +77,6 @@ const handleScroll = (e) => {
 
 
 <style lang="less" scoped>
-
 // 工作经历
 .work-exp {
     background-color: white;
@@ -113,7 +112,7 @@ const handleScroll = (e) => {
 
         .item {
             display: flex;
-            
+
 
             .circle {
                 // width: 10px;
@@ -139,17 +138,26 @@ const handleScroll = (e) => {
 
                 .company-and-time {
                     display: flex;
+                    gap: 1rem;
                     justify-content: space-between;
                     align-items: center;
 
                     .company-name {
                         font-size: 18px;
                         font-weight: 600;
+                        // 不换行，省略号
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
 
                     .company-time {
                         color: #666666;
                         font-size: 14px;
+                        // 不换行，省略号
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
 
@@ -201,12 +209,12 @@ const handleScroll = (e) => {
         right: 0;
         height: 10px;
     }
-    
+
     .top-shadow {
         top: 84px;
         background: linear-gradient(360deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.06) 100%);
     }
-    
+
     .bottom-shadow {
         bottom: 0;
         background: linear-gradient(360deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0) 100%);
@@ -219,6 +227,4 @@ const handleScroll = (e) => {
 ::-webkit-scrollbar {
     display: none;
 }
-
-
 </style>

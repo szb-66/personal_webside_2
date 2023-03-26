@@ -14,7 +14,7 @@
     // 内容水平垂直居中
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     // 高度
     height: 15rem;
     background-color: #e493d0;

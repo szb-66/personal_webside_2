@@ -31,8 +31,8 @@ onMounted(() => {
 // 获取分类
 async function getTypes() {
     try {
-        const response = await axios.get('http://localhost:3000/api/articles/types');
-        types.value = response.data;
+        const response = await axios.get('http://localhost:3000/api/types');
+        types.value = response.data.map(item => item.type)
         // console.log('获取类型成功：', response.data);
     } catch (error) {
         console.error('获取类型失败：', error);

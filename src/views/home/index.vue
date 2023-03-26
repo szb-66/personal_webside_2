@@ -26,11 +26,9 @@
                     <!-- 介绍 -->
                     <About></About>
                     <!-- 标签 -->
+                    <Tags></Tags>
                 </el-col>
             </el-row>
-            <!-- <iframe id="myVideo" src="https://player.bilibili.com/player.html?aid=52761282&bvid=BV1r441177ay&cid=92329566&page=1&high_quality=1&autoplay=1&loop=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" auto> </iframe> -->
-            <!-- <iframe src="//player.bilibili.com/player.html?aid=52761282&bvid=BV1r441177ay&cid=92329566&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> -->
-            <!-- <video preload="auto" src="blob:https://www.bilibili.com/ceb91e27-3e60-4d9c-8ca1-dd615cd8ec81" loop autoplay></video> -->
         </div>
 
 </template>
@@ -40,6 +38,8 @@ import jiNeng from './jiNeng.vue'
 import Buttom from './bottom.vue'
 import Nav from './nav.vue'
 import About from '../../components/about.vue'
+import Tags from '../../components/Tags.vue'
+
 
 
 </script>
@@ -47,7 +47,6 @@ import About from '../../components/about.vue'
 <style lang="less" scoped>
 .main {
     padding: 0 1.5rem;
-
     max-width: 1440px;
     margin: 70px auto 0 auto;
 
@@ -63,7 +62,11 @@ import About from '../../components/about.vue'
 
     .row_two {
 
-        .right {}
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
     }
     .el-row {

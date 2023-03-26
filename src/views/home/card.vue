@@ -10,7 +10,10 @@
             <div class="info">
                 <!-- 标签 -->
                 <div class="tags">
-                    <span v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
+                    <span v-for="(tag, index) in article.tags" :key="index" class="tag">
+                        <span>#</span>
+                        <span>{{ tag }}</span>
+                    </span>
                 </div>
                 <!-- 发布日期 -->
                 <div class="date">{{ article.created_at }}</div>
@@ -42,7 +45,6 @@ const goContent = () => {
 </script>
   
 <style lang="less" scoped>
-
 .card {
     border-radius: 16px;
     border: 1px solid var(--border);
@@ -50,6 +52,7 @@ const goContent = () => {
     transition: all 0.2s ease-in-out;
     color: var(--text-3);
     background-color: var(--white);
+
     .cover {
         overflow: hidden;
         border-radius: 16px 16px 0 0;
@@ -62,34 +65,57 @@ const goContent = () => {
             transition: all 0.4s ease-in-out;
         }
     }
+
     .content {
         // 左对齐
         text-align: left;
         padding: 1rem;
-    
+
         h2 {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 1rem;
             transition: all 0.1s ease-in;
             color: var(--text-1);
+            // 不换行，超出部分显示省略号
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-    
+
         .info {
             display: flex;
             // 左右分布
             justify-content: space-between;
+
+            .tags {
+                display: flex;
+                gap: 12px;
+                // 垂直对齐
+                align-items: center;
+                margin-right: 0.5rem;
+                overflow: hidden;
+
+                .tag {
+                    // 不换行，超出部分显示省略号
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            .date{
+                // 不换行
+                white-space: nowrap;
+            }
         }
-    
-        .tags span {
-            margin-right: 0.5rem;
-        }
+
     }
+
     &:hover {
         border: 1px solid var(--blue);
         box-shadow: var(--box-shadow);
 
-        h2{
+        h2 {
             color: var(--blue);
 
         }

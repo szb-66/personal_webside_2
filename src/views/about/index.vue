@@ -69,8 +69,9 @@ import objectExp from './projectExp.vue'
 
 <style lang="less" scoped>
 .main {
-    margin-top: 70px;
     padding: 0 1.5rem;
+    max-width: 1440px;
+    margin: 70px auto 0 auto;
 
     .col{
         height: 100%;

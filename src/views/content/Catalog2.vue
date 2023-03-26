@@ -102,6 +102,7 @@ const fixedStyle = computed(() => {
     margin-top: 1rem;
     padding: 1rem;
     border-radius: 1rem;
+    border: 1px solid var(--border);
     background-color: var(--white);
 
     .catalog-title {
@@ -125,9 +126,6 @@ const fixedStyle = computed(() => {
             background-color: var(--blue);
             color: var(--white);
         }
-    }
-    .h1{
-        
     }
     .h2{
         color: var(--text-2);

@@ -1,29 +1,39 @@
 <template>
-    <TitleBar>
-        <!-- 标题、tags、发布时间、类型 -->
-        <div class="article-info">
-            <h1>{{ article.title }}</h1>
-            <div class="tags">
-                <span v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
-            </div>
-            <div class="publish-time">{{ article.created_at }}</div>
-            <div class="type">{{ article.type }}</div>
-        </div>
-    </TitleBar>
-    <div class="main">
-        <!-- el栅格系统 -->
-        <el-row :gutter="16">
-            <el-col :span="19">
-                <div class="content_bg">
-                    <div v-html="processedContent.value" class="content" @scroll="onScroll" ref="content"></div>
+    <div>
+        <TitleBar>
+            <!-- 标题、tags、发布时间、类型 -->
+            <div class="article-info">
+                <div class="tags">
+                    <span v-for="(tag, index) in article.tags" :key="index">{{ tag }}</span>
                 </div>
-            </el-col>
-            <el-col :span="5">
-                <About></About>
-                <Catalog :data="catalog" v-if="catalog.length > 0 ? true : false" :visibleSectionId="visibleSectionId"
-                    ></Catalog>
-            </el-col>
-        </el-row>
+                <h1>{{ article.title }}</h1>
+                <div class="article-info-three">
+                    <div class="publish-time">
+                        <el-icon ><Clock /></el-icon>
+                        <span>{{ article.created_at }}</span>
+                    </div>
+                    <div class="type">
+                        <el-icon><MessageBox /></el-icon>
+                        <span>{{ article.type }}</span>
+                    </div>
+                </div>
+            </div>
+        </TitleBar>
+        <div class="main">
+            <!-- el栅格系统 -->
+            <el-row :gutter="16">
+                <el-col :span="19">
+                    <div class="content_bg">
+                        <div v-html="processedContent.value" class="content" @scroll="onScroll" ref="content"></div>
+                    </div>
+                </el-col>
+                <el-col :span="5">
+                    <About></About>
+                    <Catalog :data="catalog" v-if="catalog.length > 0 ? true : false" :visibleSectionId="visibleSectionId">
+                    </Catalog>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </template>
 
@@ -61,7 +71,7 @@ onMounted(async () => {
     // 目录数据
     catalog.value = buildTree(response.data);
 
-    const res = await axios.get(`http://localhost:3000/api/articles/${id}`);
+    const res = await axios.get(`http://localhost:3000/api/articles/id/${id}`);
     // 文章数据，标题、内容等
     article.value = res.data;
 
@@ -119,7 +129,7 @@ const handleScroll = () => {
     let currentVisibleSection = null;
 
     for (const section of sections) {
-        if (section.offsetTop <= scrollTop-240+window.innerHeight / 2) {
+        if (section.offsetTop <= scrollTop - 240 + window.innerHeight / 2) {
             currentVisibleSection = section;
         } else {
             break;
@@ -144,9 +154,11 @@ const handleScroll = () => {
 .article-info {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     color: #fff;
+    margin-top: 40px;
 
     h1 {
         font-size: 3rem;
@@ -157,30 +169,36 @@ const handleScroll = () => {
     .tags {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        gap: 0.5rem;
 
         span {
-            margin: 0 0.5rem;
             padding: 0.2rem 0.5rem;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.2);
         }
     }
 
-    .publish-time {
-        margin: 0;
-        padding: 0;
-        font-size: 0.8rem;
-    }
+    .article-info-three {
+        display: flex;
+        gap: 2rem;
 
-    .type {
-        margin: 0;
-        padding: 0;
-        font-size: 0.8rem;
+        .publish-time {
+            margin: 0;
+            padding: 0;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+        
+        .type {
+            margin: 0;
+            padding: 0;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
     }
 }
 
@@ -195,6 +213,7 @@ const handleScroll = () => {
         background-color: #fff;
         border-radius: 10px;
         line-height: 180%;
+        border: 1px solid var(--border);
 
         ::v-deep h1,
         ::v-deep h2,
@@ -206,7 +225,5 @@ const handleScroll = () => {
             font-weight: 600;
         }
     }
-
-
 }
 </style>

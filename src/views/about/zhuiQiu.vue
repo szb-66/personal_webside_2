@@ -18,13 +18,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const threeRef = ref(null)
 let count = 0
+let intervalId
 
 onMounted(() => {
-    setInterval(() => {
+    intervalId = setInterval(() => {
         count++
         threeRef.value.style.transform = `translateY(-${count * 2 + 0.5 * count}rem)`
         if (count === 5) {
@@ -39,6 +40,11 @@ onMounted(() => {
         }
     }, 2000)
 })
+
+onBeforeUnmount(() => {
+    clearInterval(intervalId)
+})
+
 </script>
 
 <style lang="less" scoped>

@@ -1,7 +1,7 @@
 <template>
     <div class="bottom">
         <div v-for="(item, i) in data" :key="i" :class="['item', { 'item2': activeIndex === i }]"
-            @mouseover="activeIndex = i" @mouseleave="activeIndex = -1" :style="{ background: item.bgc }">
+            @mouseover="activeIndex = i" @mouseleave="activeIndex = -1" :style="{ background: item.bgc }" @click="go()">
             <div class="text">{{ item.title }}</div>
             <div class="xian"></div>
             <img :src="item.imgSrc" class="img">
@@ -11,6 +11,9 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
 const activeIndex = ref(-1);
 
 const data = [
@@ -33,6 +36,11 @@ const data = [
         url: ""
     },
 ]
+
+function go(){
+    // 编程路由,名称跳转
+    router.push({ name: 'ArticleList' });
+}
 
 </script>
 
