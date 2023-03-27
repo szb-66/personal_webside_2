@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  v-loading.fullscreen.lock="loading" element-loading-text="加载中...">
         <TitleBar>
             <!-- 标题、tags、发布时间、类型 -->
             <div class="article-info">
@@ -51,15 +51,13 @@ import Catalog from './Catalog2.vue'
 const route = useRoute()
 const id = route.params.id
 
-// 文章
-const article = ref({})
-// 目录
-const catalog = ref([])
-// 显示的文章内容
-const processedContent = ref('loading')
 
-// 当前显示的标题id
-const visibleSectionId = ref(null);
+const article = ref({})// 文章
+const catalog = ref([])// 目录
+const processedContent = ref('loading')// 显示的文章内容
+const visibleSectionId = ref(null);// 当前显示的标题id
+const loading = ref(true); // 是否加载中
+
 // 依赖注入
 provide('visibleSectionId', visibleSectionId)
 
@@ -79,6 +77,11 @@ onMounted(async () => {
     processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
     // 监听滚动事件判断当前标题
     window.addEventListener('scroll', handleScroll);
+    setTimeout(() => {
+
+        loading.value = false;
+    }, 1000);
+
 });
 
 

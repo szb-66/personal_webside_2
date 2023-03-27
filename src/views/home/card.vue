@@ -1,5 +1,5 @@
 <template>
-    <div class="card" @click="goContent">
+    <div class="card" @click="goContent" :id="article.id">
         <!-- 封面 -->
         <div class="cover">
             <img :src="article.cover_img_url" alt="封面图片" />
@@ -103,7 +103,8 @@ const goContent = () => {
                     text-overflow: ellipsis;
                 }
             }
-            .date{
+
+            .date {
                 // 不换行
                 white-space: nowrap;
             }
@@ -126,5 +127,4 @@ const goContent = () => {
         }
     }
 }
-
 </style>

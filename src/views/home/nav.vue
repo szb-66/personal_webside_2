@@ -4,9 +4,9 @@
             <li v-for="(type, index) in types" :key="index"  @click="getArticles(type,index)"
                 :class="{ active: currentModule === index }">{{ type }}</li>
         </ul>
-        <el-row :gutter="16" class="content">
+        <el-row :gutter="16" class="content" v-loading="loading">
             <el-col :span="12" v-for="(article, index) in articleList" :key="index" style="margin-bottom: 1rem;">
-                <ArticleCard  :article="article" class="card">
+                <ArticleCard  :article="article">
                 </ArticleCard>
             </el-col>
         </el-row>
@@ -19,11 +19,11 @@ import { ref, computed, onMounted, watch } from 'vue'
 import ArticleCard from './card.vue'
 import axios from 'axios'
 
-// 获取文章信息
-const types = ref(null);
-const articleList = ref([]);
-// 选中的id
-const currentModule = ref(0)
+
+const types = ref(null);// 文章类型
+const articleList = ref([]);// 文章列表
+const currentModule = ref(0)// 选中的id
+const loading = ref(true);// 加载状态
 
 onMounted(() => {
     getTypes();
@@ -38,16 +38,19 @@ async function getTypes() {
         console.error('获取类型失败：', error);
     }
 }
+
 // 获取分类中的文章信息
 async function getArticles(type,index) {
+    loading.value = true;
     try {
         const response = await axios.get('/szb-api/articles/info', {
-            params: {
-                type
-            }
+            params: {type}
         });
         articleList.value = response.data;
         // console.log('获取文章成功：', response.data);
+        setTimeout(() => {
+        loading.value = false;
+        }, 500);
     } catch (error) {
         console.error('获取文章失败：', error);
     }

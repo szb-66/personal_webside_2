@@ -2,40 +2,26 @@
     <div class="main">
         <el-row :gutter="16">
             <!-- 左边 -->
-            <el-col :span="19" class="articleList">
-                <!-- 实际列表 -->
-                <div class="article" v-for="(item, index) in showTableData" :id="index" @click="go(item.id)">
-                    <img :src="item.cover_img_url" class="cover">
-                    <div class="info">
-                        <div class="title">{{ item.title }}</div>
-                        <div class="info_twoRow">
-                            <div class="time">
-                                <el-icon ><Clock /></el-icon>
-                                <span>{{ item.created_at }}</span>
-                            </div>
-                            <div class="type">
-                                <el-icon><MessageBox /></el-icon>
-                                <span>{{ item.type }}</span>
-                            </div>
-                        </div>
-                        <div class="tags">
-                            <div v-for="(tag, i) in item.tags" :id="i">
-                                <span>#</span><span>{{ tag }}</span>
-                            </div>
-                        </div>
+            <el-col :span="19">
+                <div class="articleList">
+                    <!-- 文章列表 -->
+                    <div v-loading.fullscreen.lock="loading" element-loading-text="加载中...">
+                        <Article v-for="(item, index) in showTableData" :key="index" :article="item">
+                        </Article>
                     </div>
+                    <!-- 分页器 -->
+                    <el-pagination background layout="total, sizes, prev, pager, next, jumper"
+                        @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageIndex"
+                        :page-size="pageSize" :page-sizes="[2, 4, 6, 10]" :total="total">
+                    </el-pagination>
                 </div>
-
-                <!-- 分页器 -->
-                <el-pagination layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange" :current-page="pageIndex" :page-size="pageSize"
-                    :page-sizes="[2, 4, 6, 10]" :total="total">
-                </el-pagination>
             </el-col>
             <!-- 右边 -->
             <el-col :span="5" class="right">
-                <About></About>
-                <Tags></Tags>
+                <div class="right">
+                    <About></About>
+                    <Tags></Tags>
+                </div>
             </el-col>
         </el-row>
     </div>
@@ -47,6 +33,8 @@ import { ref, onMounted } from 'vue'
 import About from '../../components/about.vue'
 import Tags from '../../components/tags.vue'
 import { useRouter } from 'vue-router'
+import Article from './article.vue'
+
 const router = useRouter()
 
 const pageIndex = ref(1); // 第几页
@@ -54,6 +42,7 @@ const pageSize = ref(8); // 每页几条数据
 const total = ref(0); // 总条目数
 const allTableData = ref([]); // 所有的数据
 const showTableData = ref([]); // 当前展示的数据
+const loading = ref(true); // 是否加载中
 
 // 异步数据请求
 onMounted(async () => {
@@ -71,7 +60,9 @@ onMounted(async () => {
         total.value = allTableData.value.length;
         // 4. 根据当前是第几页、每页展示几条，去截取需要展示的数据
         getShowTableData();
+        loading.value = false;
     }, 1000);
+
 });
 
 function getShowTableData() {
@@ -95,14 +86,7 @@ function handleSizeChange(val) {
     getShowTableData();
 }
 
-function go(id){
-    router.push({
-        name: 'content',
-        params: {
-            id: id
-        }
-    })
-}
+
 </script>
 
 
@@ -121,76 +105,18 @@ function go(id){
         gap: 1rem;
         background-color: var(--white);
         border: 1px solid var(--border);
+        padding: 1rem;
         border-radius: 1rem;
-        padding: 1rem 1rem;
         margin-bottom: 2rem;
 
-        .article {
-            display: flex;
-            gap: 2rem;
-            padding: 0.4rem;
-            // move
-            transition: all 0.3s;
-            // 垂直居中
-            align-items: center;
-
-            .cover {
-                width: 12rem;
-                height: 6.75rem;
-
-                border-radius: 0.5rem;
-                border: 1px solid var(--border);
-                overflow: hidden;
-            }
-
-            &:hover {
-                border-radius: 1rem;
-                // border: 1px solid var(--border);
-                background-color: var(--bgc);
-                // 手指
-                cursor: pointer;
-
-                .title {
-                    color: var(--blue);
-                }
-            }
-
-            .info {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-
-                .info_twoRow {
-                    color: var(--text-3);
-                    display: flex;
-                    gap: 1rem;
-                    .time {
-                        display: flex;
-                        align-items: center;
-                        gap: 0.2em;
-                    }
-
-                    .type {
-                        display: flex;
-                        align-items: center;
-                        gap: 0.2rem;
-                    }
-
-                }
-
-                .title {
-                    font-size: 1.5rem;
-                    font-weight: 600;
-                }
-
-                .tags {
-                    display: flex;
-                    gap: 0.5rem;
-                    color: var(--text-3);
-                }
-            }
-        }
-
     }
+
+    .right {
+        // padding: 0!;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
 }
 </style>
