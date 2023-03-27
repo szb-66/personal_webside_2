@@ -58,7 +58,7 @@ const showTableData = ref([]); // 当前展示的数据
 // 异步数据请求
 onMounted(async () => {
     // 获取最新文章信息
-    await axios.get(`http://localhost:3000/api/articles/news`)
+    await axios.get(`/szb-api/articles/news`)
         .then(res => {
             // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
             allTableData.value = res.data;

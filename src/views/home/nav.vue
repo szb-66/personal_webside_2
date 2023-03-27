@@ -31,7 +31,7 @@ onMounted(() => {
 // 获取分类
 async function getTypes() {
     try {
-        const response = await axios.get('http://localhost:3000/api/types');
+        const response = await axios.get('/szb-api/types');
         types.value = response.data.map(item => item.type)
         // console.log('获取类型成功：', response.data);
     } catch (error) {
@@ -41,7 +41,7 @@ async function getTypes() {
 // 获取分类中的文章信息
 async function getArticles(type,index) {
     try {
-        const response = await axios.get('http://localhost:3000/api/articles/info', {
+        const response = await axios.get('/szb-api/articles/info', {
             params: {
                 type
             }

@@ -15,7 +15,7 @@ const tags = ref([]);
 // 异步数据请求
 onMounted(async () => {
     // 获取tags信息
-    await axios.get(`http://localhost:3000/api/tags`)
+    await axios.get(`/szb-api/tags`)
         .then(res => {
             // 属性：tag、count
             tags.value = res.data;

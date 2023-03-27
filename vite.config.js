@@ -18,16 +18,12 @@ export default defineConfig({
 
   server: {
     open: true,
-  },
-/*   css: {
-    preprocessorOptions: {
-      less: {
-        modifyVars: {
-          hack: `true; @import (reference) "${path.resolve("src/style.less")}";`,
-        },
-        javascriptEnabled: true,
+    proxy: {
+      '/szb-api': {
+        target: 'http://szb.design:3000/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/szb-api/, ''),
       },
     },
-  }, */
-
+  },
 })
