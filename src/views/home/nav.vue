@@ -1,29 +1,26 @@
 <template>
     <div>
         <ul class="nav">
-            <li v-for="(type, index) in types" :key="index"  @click="getArticles(type,index)"
+            <li v-for="(type, index) in types" :key="index" @click="getArticles(type, index)"
                 :class="{ active: currentModule === index }">{{ type }}</li>
         </ul>
-        <el-row :gutter="16" class="content" v-loading="loading">
+
+        <el-row :gutter="16">
             <el-col :span="12" v-for="(article, index) in articleList" :key="index" style="margin-bottom: 1rem;">
-                <ArticleCard  :article="article">
-                </ArticleCard>
+                <ArticleCard :article="article"></ArticleCard>
             </el-col>
         </el-row>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
-// import articleList from '../../assets/data/articleList.json'
+import { ref, onMounted, watch } from 'vue'
 import ArticleCard from './card.vue'
 import axios from 'axios'
-
 
 const types = ref(null);// 文章类型
 const articleList = ref([]);// 文章列表
 const currentModule = ref(0)// 选中的id
-const loading = ref(true);// 加载状态
 
 onMounted(() => {
     getTypes();
@@ -40,17 +37,13 @@ async function getTypes() {
 }
 
 // 获取分类中的文章信息
-async function getArticles(type,index) {
-    loading.value = true;
+async function getArticles(type, index) {
     try {
         const response = await axios.get('/szb-api/articles/info', {
-            params: {type}
+            params: { type }
         });
         articleList.value = response.data;
-        // console.log('获取文章成功：', response.data);
-        setTimeout(() => {
-        loading.value = false;
-        }, 500);
+
     } catch (error) {
         console.error('获取文章失败：', error);
     }
@@ -66,10 +59,11 @@ watch(() => types.value, (newValue) => {
     }
 });
 
-/* const currentArticles = computed(() => modules[currentModule.value].articles) */
-
-
 </script>
+
+
+
+
 
 <style lang="less" scoped>
 .nav {
@@ -81,6 +75,7 @@ watch(() => types.value, (newValue) => {
     border: 1px solid var(--border);
     border-radius: 1rem;
     padding: 0 12px;
+    margin-bottom: 1rem;
     align-items: flex-start;
     gap: 0.5em;
     align-items: center;
@@ -113,9 +108,4 @@ watch(() => types.value, (newValue) => {
         }
     }
 }
-
-.content {
-    margin-top: 1em;
-}
-
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="bottom">
         <div v-for="(item, i) in data" :key="i" :class="['item', { 'item2': activeIndex === i }]"
-            @mouseover="activeIndex = i" @mouseleave="activeIndex = -1" :style="{ background: item.bgc }" @click="go()">
+            @mouseover="activeIndex = i" @mouseleave="activeIndex = -1" :style="{ background: item.bgc }" @click="go(item.base)">
             <div class="text">{{ item.title }}</div>
             <div class="xian"></div>
             <img :src="item.imgSrc" class="img">
@@ -21,25 +21,28 @@ const data = [
         title: "设计知识库",
         imgSrc: "src/assets/images/sheJi.png",
         bgc: "linear-gradient(90deg, #358CFF 0%, #25A7FF 100%)",
-        url: ""
+        base: "design"
     },
     {
         title: "开发知识库",
         imgSrc: "src/assets/images/kaiFa.png",
         bgc: "linear-gradient(90deg, #FF6854 0%, #FF9147 100%)",
-        url: ""
+        base: "developer"
     },
     {
         title: "最新发布",
         imgSrc: "src/assets/images/recently.png",
         bgc: "linear-gradient(90deg, #18E7AF 0%, #1BE9CB 100%)",
-        url: ""
+        base: "new"
     },
 ]
 
-function go(){
-    // 编程路由,名称跳转
-    router.push({ name: 'ArticleList' });
+function go(base){
+    if(base==='new'){
+        router.push({ name:'New' });
+    }else{
+        router.push({path:`/Base/${base}`})
+    }
 }
 
 </script>

@@ -4,8 +4,9 @@
             <!-- 左边 -->
             <el-col :span="19">
                 <div class="articleList">
+                    <img :src="url" class="titleImg">
                     <!-- 文章列表 -->
-                    <div v-loading.fullscreen.lock="loading" element-loading-text="加载中...">
+                    <div>
                         <Article v-for="(item, index) in showTableData" :key="index" :article="item">
                         </Article>
                     </div>
@@ -32,36 +33,55 @@ import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import About from '../../components/about.vue'
 import Tags from '../../components/tags.vue'
-import { useRouter } from 'vue-router'
-import Article from './article.vue'
+import { useRouter, useRoute } from 'vue-router'
+import Article from '../../components/Article.vue'
 
-const router = useRouter()
+// 接受路由传过来的id
+const route = useRoute()
+const base = route.params.base
 
 const pageIndex = ref(1); // 第几页
 const pageSize = ref(8); // 每页几条数据
 const total = ref(0); // 总条目数
 const allTableData = ref([]); // 所有的数据
 const showTableData = ref([]); // 当前展示的数据
-const loading = ref(true); // 是否加载中
+
+const url = ref('')
 
 // 异步数据请求
 onMounted(async () => {
-    // 获取最新文章信息
-    await axios.get(`/szb-api/articles/news`)
-        .then(res => {
-            // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
-            allTableData.value = res.data;
+    if (base === 'design') {
+        await axios.get(`/szb-api/articles/knowledge_base`, {
+            params: { knowledge_base: '设计知识库' }
         })
-        .catch(err => {
-            console.log(err);
+            .then(res => {
+                allTableData.value = res.data;
+                // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        url.value = 'src/assets/images/baseSheJi.png'
+    } else {
+        await axios.get(`/szb-api/articles/knowledge_base`, {
+            params: { knowledge_base: '开发知识库' }
         })
+            .then(res => {
+                allTableData.value = res.data;
+                // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
+            })
+            url.value ='src/assets/images/baseKaiFa.png'
+
+    }
+
     setTimeout(() => {
         // 3. 获取总条目数
         total.value = allTableData.value.length;
         // 4. 根据当前是第几页、每页展示几条，去截取需要展示的数据
         getShowTableData();
-        loading.value = false;
     }, 1000);
+
+
 
 });
 
@@ -85,19 +105,14 @@ function handleSizeChange(val) {
     pageSize.value = val;
     getShowTableData();
 }
-
-
 </script>
-
-
-
-
 
 <style lang="less" scoped>
 .main {
-    padding: 0 1.5rem;
     max-width: 1440px;
-    margin: 70px auto 0 auto;
+    padding: 0 1.5rem;
+    margin: 90px auto 0 auto;
+
 
     .articleList {
         display: flex;
@@ -109,6 +124,11 @@ function handleSizeChange(val) {
         border-radius: 1rem;
         margin-bottom: 2rem;
 
+        .newTitle {
+            margin: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
     }
 
     .right {

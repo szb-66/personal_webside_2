@@ -1,12 +1,16 @@
 <template>
     <div class="header"
-        :style="{ backgroundColor: isTop ? 'transparent' : '#fff', boxShadow: isTop ? 'none' : '0 0 5px rgba(0, 0, 0, 0.2)' }">
+        :style="{ backgroundColor: isTop ? 'rgba(255, 255, 255, 0)' : '#fff', boxShadow: isTop ? 'none' : '0 0 5px rgba(0, 0, 0, 0.2)' }">
         <div class="main">
             <!-- 左边 -->
             <div class="left">
                 <img src="../assets/images/head.png" style=" width: 32px;">
-                <button @click="toPage('/home')">首頁</button>
-                <button @click="toPage('/about')">关于我</button>
+                <button @click="toPage('/home')">
+                    <div :style="{ color: isTop && showWhite ? 'white' : '' }">首頁</div>
+                </button>
+                <button @click="toPage('/about')">
+                    <div :style="{ color: isTop && showWhite ? 'white' : '' }">关于我</div>
+                </button>
             </div>
             <!-- 右边 -->
             <div class="right">
@@ -18,10 +22,11 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { ref } from 'vue';
+import { useRouter,useRoute  } from 'vue-router'
+import { ref,watch  } from 'vue';
 
 const router = useRouter()
+const route = useRoute();
 //创建点击跳转函数
 function toPage(url) {
     router.push(url)
@@ -34,6 +39,12 @@ window.addEventListener('scroll', () => {
     isTop.value = scrollTop.value === 0;
 });
 
+const showWhite = ref(false);//控制文字白色模式
+
+// 根据页面名称判断是否需要把文字改为白色
+watch(route, (to) => {
+    showWhite.value = to.name === 'content' || to.name === 'New';
+});
 
 
 </script>
@@ -58,6 +69,7 @@ window.addEventListener('scroll', () => {
     transition: all 0.3s;
 
 
+
     .main {
         display: flex;
         justify-content: space-between;
@@ -68,12 +80,12 @@ window.addEventListener('scroll', () => {
         max-width: 1440px;
         margin: 0 auto;
         text-align: center;
-
+        
         .left {
             display: flex;
             align-items: center;
             gap: 8px;
-
+            
             button {
                 border-radius: 20px;
                 border: 1px solid transparent;
@@ -82,7 +94,7 @@ window.addEventListener('scroll', () => {
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.25s;
-                background: rgba(255, 255, 255, 0);
+                background: none;
             }
 
             button:hover {
@@ -121,6 +133,4 @@ window.addEventListener('scroll', () => {
     .main {
         width: 1440px;
     }
-}
-
-</style>
+}</style>

@@ -18,9 +18,14 @@ const routes = [
     component: () => import('../views/content/index.vue')
   },
   {
-    path: '/ArticleList',
-    name: 'ArticleList',
-    component: () => import('../views/ArticleList/index.vue')
+    path: '/New',
+    name: 'New',
+    component: () => import('../views/New/index.vue')
+  },
+  {
+    path: '/Base/:base',
+    name: 'Base',
+    component: () => import('../views/Base/index.vue')
   },
 ]
 
