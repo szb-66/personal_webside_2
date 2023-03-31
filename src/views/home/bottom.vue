@@ -19,19 +19,19 @@ const activeIndex = ref(-1);
 const data = [
     {
         title: "设计知识库",
-        imgSrc: "src/assets/images/sheJi.png",
+        imgSrc: "/images/sheJi.png",
         bgc: "linear-gradient(90deg, #358CFF 0%, #25A7FF 100%)",
         base: "design"
     },
     {
         title: "开发知识库",
-        imgSrc: "src/assets/images/kaiFa.png",
+        imgSrc: "/images/kaiFa.png",
         bgc: "linear-gradient(90deg, #FF6854 0%, #FF9147 100%)",
         base: "developer"
     },
     {
         title: "最新发布",
-        imgSrc: "src/assets/images/recently.png",
+        imgSrc: "/images/recently.png",
         bgc: "linear-gradient(90deg, #18E7AF 0%, #1BE9CB 100%)",
         base: "new"
     },

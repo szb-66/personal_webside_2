@@ -1,6 +1,6 @@
 <template>
     <div class="zhaoPian">
-        <img src="src/assets/images/zhaoPian.png" alt="">
+        <img src="/images/zhaoPian.png" alt="">
     </div>
 </template>
 

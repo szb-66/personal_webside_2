@@ -9,7 +9,7 @@
             <span>了解更多关于</span>
             <span class="web" @click="goTwo()">建筑师</span>
         </div>
-        <img class="five" src="src/assets/images/xingGeImg.png" alt="性格图片">
+        <img class="five" src="/images/xingGeImg.png" alt="性格图片">
     </div>
 </template>
 

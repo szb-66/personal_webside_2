@@ -1,6 +1,6 @@
 <template>
     <div class="top">
-        <img class="one" src="src/assets/images/xinXiTop.png" alt="地图">
+        <img class="one" src="/images/xinXiTop.png" alt="地图">
         <div class="two">
             <span>现居地</span>
             <strong>中国</strong>

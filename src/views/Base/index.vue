@@ -61,7 +61,7 @@ onMounted(async () => {
             .catch(err => {
                 console.log(err);
             })
-        url.value = 'src/assets/images/baseSheJi.png'
+        url.value = '/images/baseSheJi.png'
     } else {
         await axios.get(`/szb-api/articles/knowledge_base`, {
             params: { knowledge_base: '开发知识库' }
@@ -70,7 +70,7 @@ onMounted(async () => {
                 allTableData.value = res.data;
                 // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
             })
-            url.value ='src/assets/images/baseKaiFa.png'
+            url.value ='/images/baseKaiFa.png'
 
     }
 

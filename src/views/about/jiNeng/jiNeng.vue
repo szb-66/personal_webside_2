@@ -9,8 +9,8 @@
         <div class="text">技能</div>
         <div class="text2">无限可能</div>
         <div class="img">
-            <img src="src/assets/images/app.png">
-            <img src="src/assets/images/app.png">
+            <img src="/images/app.png">
+            <img src="/images/app.png">
         </div>
     </div>
 </template>
@@ -21,78 +21,79 @@
 <script setup>
 import { ref } from 'vue';
 import JiNengMini from '../jiNeng/jiNengMini.vue'
+
 let isHovering = ref(false);
 
 
 const jiNengLine = [
     {
         "name": "HTML5",
-        "src": "src/assets/images/logo/html5.png",
+        "src": "/images/logo/html5.png",
         "url":"https://www.w3school.com.cn/html/html5_intro.asp"
     },
     {
         "name": "CSS3",
-        "src": "src/assets/images/logo/css3.png",
+        "src": "/images/logo/css3.png",
         "url":"https://developer.mozilla.org/zh-CN/docs/Web/CSS"
     },
     {
         "name": "JavaScript",
-        "src": "src/assets/images/logo/js.png",
+        "src": "/images/logo/js.png",
         "url":"https://developer.mozilla.org/zh-CN/docs/learn/JavaScript"
     },
     {
         "name": "Vue3",
-        "src": "src/assets/images/logo/vue3.png",
+        "src": "/images/logo/vue3.png",
         "url":"https://cn.vuejs.org/guide/introduction.html"
     },
     {
         "name": "Photoshop",
-        "src": "src/assets/images/logo/ps.png",
+        "src": "/images/logo/ps.png",
         "url":"https://www.adobe.com/cn/products/photoshop.html"
     },
     {
         "name": "Sketch",
-        "src": "src/assets/images/logo/sketch.png",
+        "src": "/images/logo/sketch.png",
         "url":"https://www.sketch.com/"
     },
     {
         "name": "Figma",
-        "src": "src/assets/images/logo/figma.png",
+        "src": "/images/logo/figma.png",
         "url":"https://www.figma.com/"
     },
     {
         "name": "Illustrator",
-        "src": "src/assets/images/logo/ai.png",
+        "src": "/images/logo/ai.png",
         "url":"https://www.adobe.com/cn/products/illustrator.html"
     },
     {
         "name": "Cinema 4D",
-        "src": "src/assets/images/logo/c4d.png",
+        "src": "/images/logo/c4d.png",
         "url":"https://www.maxon.net/cn/"
     },
     {
         "name": "After Effects",
-        "src": "src/assets/images/logo/ae.png",
+        "src": "/images/logo/ae.png",
         "url":"https://www.adobe.com/cn/products/aftereffects.html"
     },
     {
         "name": "Js Design",
-        "src": "src/assets/images/logo/jsdesign.png",
+        "src": "/images/logo/jsdesign.png",
         "url":"https://js.design/"
     },
     {
         "name": "Principle",
-        "src": "src/assets/images/logo/principle.png",
+        "src": "/images/logo/principle.png",
         "url":"https://principleformac.com/"
     },
     {
         "name": "Marvelous Designer",
-        "src": "src/assets/images/logo/md.png",
+        "src": "/images/logo/md.png",
         "url":"https://www.marvelousdesigner.com/"
     },
     {
         "name": "Experience Design",
-        "src": "src/assets/images/logo/xd.png",
+        "src": "/images/logo/xd.png",
         "url":"https://www.adobe.com/cn/products/xd.html"
     }
 ]
