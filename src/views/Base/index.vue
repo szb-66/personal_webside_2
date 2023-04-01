@@ -51,7 +51,7 @@ const url = ref('')
 // 异步数据请求
 onMounted(async () => {
     if (base === 'design') {
-        await axios.get(`/szb-api/articles/knowledge_base`, {
+        await axios.get(`https://szb.design:3000/api/articles/knowledge_base`, {
             params: { knowledge_base: '设计知识库' }
         })
             .then(res => {
@@ -61,16 +61,16 @@ onMounted(async () => {
             .catch(err => {
                 console.log(err);
             })
-        url.value = 'src/assets/images/baseSheJi.png'
+        url.value = '/images/baseSheJi.png'
     } else {
-        await axios.get(`/szb-api/articles/knowledge_base`, {
+        await axios.get(`https://szb.design:3000/api/articles/knowledge_base`, {
             params: { knowledge_base: '开发知识库' }
         })
             .then(res => {
                 allTableData.value = res.data;
                 // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
             })
-            url.value ='src/assets/images/baseKaiFa.png'
+            url.value ='/images/baseKaiFa.png'
 
     }
 

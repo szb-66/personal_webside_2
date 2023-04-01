@@ -23,7 +23,7 @@
     cursor: default;
     overflow: hidden;
 
-    background-image: url(src/assets/images/youXiImg.png);
+    background-image: url(/images/youXiImg.png);
     // 背景图片居中，宽高自适应，可以超出，但是要铺满，不变形
     background-position: center;
     background-size: cover;

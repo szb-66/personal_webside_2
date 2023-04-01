@@ -8,7 +8,7 @@
                 <div>{{ item.name }}</div>
             </div>
         </div>
-        <img src="src/assets/images/shengYaImg.png" alt="生涯图片">
+        <img src="/images/shengYaImg.png" alt="生涯图片">
     </div>
 </template>
 

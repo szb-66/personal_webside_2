@@ -347,7 +347,7 @@ const showTableData = ref([]); // 当前展示的数据
 
 // 异步数据请求
 onMounted(async () => {
-    await axios.get(`/szb-api/articles/news`)
+    await axios.get(`https://szb.design:3000/api/articles/news`)
         .then(res => {
             allTableData.value = res.data;
             // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)

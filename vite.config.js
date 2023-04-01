@@ -16,7 +16,7 @@ export default defineConfig({
     }),
   ],
 
-  server: {
+/*   server: {
     open: true,
     proxy: {
       '/szb-api': {
@@ -25,5 +25,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/szb-api/, ''),
       },
     },
-  },
+  }, */
 })

@@ -1,7 +1,7 @@
 <template>
     <div class="teChang">
         <div class="one">特长</div>
-        <div class="two">地球村长点闪电工效专业户</div>
+        <div class="two">地球村长期闪电工效专业户</div>
         <div class="three">学习能力MAX</div>
     </div>
 </template>
