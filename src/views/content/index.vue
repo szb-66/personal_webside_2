@@ -64,11 +64,11 @@ provide('visibleSectionId', visibleSectionId)
 
 // 异步数据请求
 onMounted(async () => {
-    const response = await axios.get(`/szb-api/articles/catalog/${id}`);
+    const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${id}`);
     // 目录数据
     catalog.value = buildTree(response.data);
 
-    const res = await axios.get(`/szb-api/articles/id/${id}`);
+    const res = await axios.get(`https://szb.design:3000/api/articles/id/${id}`);
     // 文章数据，标题、内容等
     article.value = res.data;
 

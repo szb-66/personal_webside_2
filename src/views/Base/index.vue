@@ -51,7 +51,7 @@ const url = ref('')
 // 异步数据请求
 onMounted(async () => {
     if (base === 'design') {
-        await axios.get(`/szb-api/articles/knowledge_base`, {
+        await axios.get(`https://szb.design:3000/api/articles/knowledge_base`, {
             params: { knowledge_base: '设计知识库' }
         })
             .then(res => {
@@ -63,7 +63,7 @@ onMounted(async () => {
             })
         url.value = '/images/baseSheJi.png'
     } else {
-        await axios.get(`/szb-api/articles/knowledge_base`, {
+        await axios.get(`https://szb.design:3000/api/articles/knowledge_base`, {
             params: { knowledge_base: '开发知识库' }
         })
             .then(res => {
