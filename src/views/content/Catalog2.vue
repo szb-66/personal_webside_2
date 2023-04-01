@@ -2,7 +2,10 @@
     <!-- 分级目录 -->
     <div class="catalog" ref="fixedDiv" :class="{ fixed: isFixed }" :style="fixedStyle">
         <div class="catalog-title">
-            目录
+            <el-icon><Memo /></el-icon>
+            <span>
+                目录
+            </span>
         </div>
         <!-- 目录内容 -->
         <div class="content">
@@ -106,6 +109,9 @@ const fixedStyle = computed(() => {
     .catalog-title {
         margin: 0 0 1rem 1rem;
         font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .h1,

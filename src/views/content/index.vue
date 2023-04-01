@@ -9,11 +9,15 @@
                 <h1>{{ article.title }}</h1>
                 <div class="article-info-three">
                     <div class="publish-time">
-                        <el-icon ><Clock /></el-icon>
+                        <el-icon>
+                            <Clock />
+                        </el-icon>
                         <span>{{ article.created_at }}</span>
                     </div>
                     <div class="type">
-                        <el-icon><MessageBox /></el-icon>
+                        <el-icon>
+                            <MessageBox />
+                        </el-icon>
                         <span>{{ article.type }}</span>
                     </div>
                 </div>
@@ -29,6 +33,7 @@
                 </el-col>
                 <el-col :span="5">
                     <About></About>
+                    <RecentArticle style="margin-top: 1rem;"></RecentArticle>
                     <Catalog :data="catalog" v-if="catalog.length > 0 ? true : false" :visibleSectionId="visibleSectionId">
                     </Catalog>
                 </el-col>
@@ -46,11 +51,11 @@ import { ref, watch, onMounted, computed, provide, queuePostFlushCb } from 'vue'
 import TitleBar from './TitleBar.vue'
 import About from '../../components/about.vue'
 import Catalog from './Catalog2.vue'
+import RecentArticle from '../../components/RecentArticle.vue';
 
 // 接受路由传过来的id
 const route = useRoute()
 const id = route.params.id
-
 
 const article = ref({})// 文章
 const catalog = ref([])// 目录
@@ -60,20 +65,23 @@ const visibleSectionId = ref(null);// 当前显示的标题id
 // 依赖注入
 provide('visibleSectionId', visibleSectionId)
 
+watch(() => route.params.id, async (newId, oldId) => {
+    if (newId !== oldId) {
+    const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${newId}`);
+    catalog.value = buildTree(response.data);
 
+    const res = await axios.get(`https://szb.design:3000/api/articles/id/${newId}`);
+    article.value = res.data;
+
+    processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
+  }
+},{
+    immediate:true,
+    deep:true
+});
 
 // 异步数据请求
 onMounted(async () => {
-    const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${id}`);
-    // 目录数据
-    catalog.value = buildTree(response.data);
-
-    const res = await axios.get(`https://szb.design:3000/api/articles/id/${id}`);
-    // 文章数据，标题、内容等
-    article.value = res.data;
-
-    // 把数据中的内容替换成标题带id的内容
-    processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
     // 监听滚动事件判断当前标题
     window.addEventListener('scroll', handleScroll);
 });
@@ -187,7 +195,7 @@ const handleScroll = () => {
             align-items: center;
             gap: 0.2rem;
         }
-        
+
         .type {
             margin: 0;
             padding: 0;
@@ -222,5 +230,4 @@ const handleScroll = () => {
             font-weight: 600;
         }
     }
-}
-</style>
+}</style>
