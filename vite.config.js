@@ -16,14 +16,14 @@ export default defineConfig({
     }),
   ],
 
-/*   server: {
+  server: {
     open: true,
-    proxy: {
+/*     proxy: {
       '/szb-api': {
         target: 'http://szb.design:3000/api',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/szb-api/, ''),
       },
-    },
-  }, */
+    }, */
+  },
 })
