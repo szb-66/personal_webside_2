@@ -40,6 +40,8 @@ import Nav from './nav.vue'
 import About from '../../components/about.vue'
 import Tags from '../../components/Tags.vue'
 
+// 页面biaot
+document.title = '首页-施志标'
 
 
 </script>

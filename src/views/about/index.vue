@@ -65,6 +65,9 @@ import ZhaoPian from './zhaoPian.vue'
 import WorkExp from './workExp.vue'
 import objectExp from './projectExp.vue'
 
+// 页面biaot
+document.title = '关于我-施志标'
+
 </script>
 
 <style lang="less" scoped>

@@ -36,6 +36,9 @@ import Tags from '../../components/tags.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
 
+// 页面标题
+document.title = '知识库-施志标'
+
 // 接受路由传过来的id
 const route = useRoute()
 const base = route.params.base
@@ -57,6 +60,8 @@ onMounted(async () => {
             .then(res => {
                 allTableData.value = res.data;
                 // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
+                // 页面标题
+                document.title = '设计知识库-施志标'
             })
             .catch(err => {
                 console.log(err);
@@ -69,8 +74,9 @@ onMounted(async () => {
             .then(res => {
                 allTableData.value = res.data;
                 // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
+                document.title = '开发知识库-施志标'
             })
-            url.value ='/images/baseKaiFa.png'
+        url.value = '/images/baseKaiFa.png'
 
     }
 

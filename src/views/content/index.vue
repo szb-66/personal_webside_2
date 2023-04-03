@@ -74,6 +74,8 @@ watch(() => route.params.id, async (newId, oldId) => {
     article.value = res.data;
 
     processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
+
+    document.title = `${article.value.title}-施志标`
   }
 },{
     immediate:true,

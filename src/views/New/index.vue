@@ -338,6 +338,7 @@ import Tags from '../../components/tags.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
 
+document.title = `最新发布-施志标`
 
 const pageIndex = ref(1); // 第几页
 const pageSize = ref(8); // 每页几条数据

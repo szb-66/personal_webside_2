@@ -42,6 +42,8 @@ import RecentArticle from '../../components/RecentArticle.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
 
+document.title = `文章标签-施志标`
+
 // 接受路由传过来的tag
 const route = useRoute()
 const router = useRouter()
