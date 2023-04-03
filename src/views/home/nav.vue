@@ -26,10 +26,11 @@ const currentModule = ref(0)// 选中的id
 onMounted(() => {
     getTypes();
 });
+
 // 获取分类
 async function getTypes() {
     try {
-        const response = await axios.get('https://szb.design:3000/api/types');
+        const response = await axios.get('https://szb.design:3000/api/types/byWeight');
         types.value = response.data.map(item => item.type)
         // console.log('获取类型成功：', response.data);
     } catch (error) {

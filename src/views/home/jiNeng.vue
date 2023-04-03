@@ -1,5 +1,5 @@
 <template>
-    <div class="jiNeng" @mouseover="isHovering = true" @mouseleave="isHovering = false">
+    <div class="jiNeng" @mouseover="isHovering = true" @mouseleave="isHovering = false" @click="go()">
         <Transition name="fade">
             <div class="card-overlay" v-show="isHovering">
                         <div class="text3">随便逛逛</div>
@@ -17,7 +17,29 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 let isHovering = ref(false);
+const randomId = ref(null);
+
+function go() {
+    axios.get(`https://szb.design:3000/api/randomId`)
+        .then(res => {
+            randomId.value = res.data[0].id;
+            console.log(randomId.value);
+            router.push({
+                name: 'content',
+                params: {
+                    id: randomId.value
+                }
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
 
 </script>
 
