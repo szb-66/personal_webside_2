@@ -67,19 +67,19 @@ provide('visibleSectionId', visibleSectionId)
 
 watch(() => route.params.id, async (newId, oldId) => {
     if (newId !== oldId) {
-    const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${newId}`);
-    catalog.value = buildTree(response.data);
+        const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${newId}`);
+        catalog.value = buildTree(response.data);
 
-    const res = await axios.get(`https://szb.design:3000/api/articles/id/${newId}`);
-    article.value = res.data;
+        const res = await axios.get(`https://szb.design:3000/api/articles/id/${newId}`);
+        article.value = res.data;
 
-    processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
+        processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
 
-    document.title = `${article.value.title}-施志标`
-  }
-},{
-    immediate:true,
-    deep:true
+        document.title = `${article.value.title}-施志标`
+    }
+}, {
+    immediate: true,
+    deep: true
 });
 
 // 异步数据请求
@@ -222,14 +222,22 @@ const handleScroll = () => {
         line-height: 180%;
         border: 1px solid var(--border);
 
-        ::v-deep h1,
-        ::v-deep h2,
-        ::v-deep h3,
-        ::v-deep h4,
-        ::v-deep h5,
-        ::v-deep h6 {
+        :deep h1,
+        :deep h2,
+        :deep h3,
+        :deep h4,
+        :deep h5,
+        :deep h6 {
             line-height: 300%;
             font-weight: 600;
         }
+
+        :deep img {
+            max-width: 100%;
+            height: auto;
+        }
     }
-}</style>
+}
+
+
+</style>

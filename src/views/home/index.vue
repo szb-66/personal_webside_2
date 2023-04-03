@@ -11,7 +11,7 @@
                 </el-col>
                 <!-- 右 -->
                 <el-col :span="13">
-                    <video src="../../assets/video/home_video.mp4" style="width: 100%;border-radius: 16px;" loop autoplay
+                    <video src="/video/home_video.mp4" style="width: 100%;border-radius: 16px;" loop autoplay
                         muted></video>
                 </el-col>
             </el-row>
