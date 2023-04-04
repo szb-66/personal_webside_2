@@ -10,7 +10,7 @@
         <!-- 目录内容 -->
         <div class="content">
                 <div v-for="(item, index) in data" :id="index">
-                    <div class="h1" @click="go(item.id)" :class="{ hover: item.id === visibleSectionId }">{{ item.text }}
+                    <div class="h1" @click="go(item.id)" :class="{ hover: item.id === visibleSectionId }">{{ item.text }} 
                     </div>
                     <div v-if="show(item)">
                         <div v-for="(child, i) in item.children" :id="i">

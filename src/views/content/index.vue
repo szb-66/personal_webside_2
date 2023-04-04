@@ -28,7 +28,7 @@
             <el-row :gutter="16">
                 <el-col :span="19">
                     <div class="content_bg">
-                        <div v-html="processedContent.value" class="content" @scroll="onScroll" ref="content"></div>
+                        <div v-html="article.content" class="content" @scroll="onScroll" ref="content"></div>
                     </div>
                 </el-col>
                 <el-col :span="5">
@@ -73,8 +73,6 @@ watch(() => route.params.id, async (newId, oldId) => {
         const res = await axios.get(`https://szb.design:3000/api/articles/id/${newId}`);
         article.value = res.data;
 
-        processedContent.value = computed(() => processContent(article.value.content, catalog.value.slice()));
-
         document.title = `${article.value.title}-施志标`
     }
 }, {
@@ -106,27 +104,6 @@ const buildTree = (data, parentLevel = 0) => {
     }
 
     return result;
-};
-
-// 将id放入内容的函数
-const processContent = (content, catalog) => {
-    if (!content || !catalog) {
-        return content;
-    }
-    let modifiedContent = content;
-    let catalogItems = catalog.flatMap(item => {
-        if (item.children) {
-            return [item, ...item.children];
-        } else {
-            return item;
-        }
-    });
-    for (const item of catalogItems) {
-        const tagRegex = new RegExp(`<h${item.level}[^>]*>${item.text}<`, 'i');
-        modifiedContent = modifiedContent.replace(tagRegex, `<h${item.level} id="${item.id}">${item.text}<`);
-    }
-
-    return modifiedContent;
 };
 
 // 判断当前显示的标题函数
