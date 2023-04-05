@@ -133,6 +133,7 @@ const fixedStyle = computed(() => {
     }
     .h2{
         color: var(--text-2);
+        padding-left: 2rem;
     }
 }
 

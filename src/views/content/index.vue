@@ -199,7 +199,7 @@ const handleScroll = () => {
         line-height: 180%;
         border: 1px solid var(--border);
 
-        :deep h1,
+/*         :deep h1,
         :deep h2,
         :deep h3,
         :deep h4,
@@ -212,9 +212,35 @@ const handleScroll = () => {
         :deep img {
             max-width: 100%;
             height: auto;
-        }
+        } */
     }
 }
+</style>
 
+<style lang="less">
+.content_bg {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 300%;
+        font-weight: 600;
+    }
 
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    iframe{
+        // 居中对齐
+        display: block;
+        margin: 0 auto;
+        // 宽度50%
+        width: 48vw;
+        // 高度自适应
+        height: 27vw;
+    }
+}
 </style>
