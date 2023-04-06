@@ -193,26 +193,11 @@ const handleScroll = () => {
 
     .content_bg {
         margin: 0 auto;
-        padding: 2rem;
+        padding: 2rem 3rem;
         background-color: #fff;
         border-radius: 10px;
         line-height: 180%;
         border: 1px solid var(--border);
-
-/*         :deep h1,
-        :deep h2,
-        :deep h3,
-        :deep h4,
-        :deep h5,
-        :deep h6 {
-            line-height: 300%;
-            font-weight: 600;
-        }
-
-        :deep img {
-            max-width: 100%;
-            height: auto;
-        } */
     }
 }
 </style>
@@ -227,20 +212,56 @@ const handleScroll = () => {
     h6 {
         line-height: 300%;
         font-weight: 600;
+        // margin: 1.5rem 0 0;
     }
 
     img {
         max-width: 100%;
         height: auto;
+        margin: 0.5rem auto;
+        border-radius: 0.5rem;
     }
     iframe{
         // 居中对齐
         display: block;
         margin: 0 auto;
-        // 宽度50%
         width: 48vw;
-        // 高度自适应
         height: 27vw;
+    }
+    // 表格样式，圆角边框
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #ebedf0;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+        text-align: center;
+        overflow: auto;
+        border-radius: 5px;
+        tbody{
+            tr{
+                border-bottom: 1px solid #ebedf0;
+                &:last-child{
+                    border-bottom: none;
+                }
+                td{
+                    padding: 0.5rem 0.75rem;
+                    border-right: 1px solid #ebedf0;
+                    &:last-child{
+                        border-right: none;
+                    }
+                }
+            }
+        }
+    }
+    // 代码块
+    pre {
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        overflow: auto;
     }
 }
 </style>

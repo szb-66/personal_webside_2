@@ -56,6 +56,7 @@ const goContent = () => {
     .cover {
         overflow: hidden;
         border-radius: 16px 16px 0 0;
+        border-bottom: 1px solid var(--border);
 
         img {
             display: block;

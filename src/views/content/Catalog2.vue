@@ -56,7 +56,12 @@ const fixedDiv = ref(null);
 const isFixed = ref(false);
 // 获取fixedDiv到顶部的距离
 onMounted(function () {
+    // 延迟500ms，等待fixedDiv的值获取到
     let divOffsetTop = fixedDiv.value.offsetTop + 180;
+    setTimeout(() => {
+        if (!fixedDiv.value) return;
+        divOffsetTop = fixedDiv.value.offsetTop + 180;
+    }, 500);
     const onScroll = () => {
         if (!fixedDiv.value) return;
         // 获取滚动距离
@@ -149,4 +154,5 @@ const fixedStyle = computed(() => {
     // right: 0;
     z-index: 999;
 }
+
 </style>
