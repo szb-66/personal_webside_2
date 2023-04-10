@@ -308,11 +308,15 @@
                         <div class="newTitle">最新发布</div>
                         <!-- 文章列表 -->
                         <div>
-                            <Article v-for="(item, index) in showTableData" :key="index" :article="item">
-                            </Article>
+                            <el-row :gutter="16">
+                                <el-col :span="12" v-for="(item, index) in showTableData" :key="index" >
+                                    <Article :article="item">
+                                    </Article>
+                                </el-col>
+                            </el-row>
                         </div>
                         <!-- 分页器 -->
-                        <el-pagination background layout="total, sizes, prev, pager, next, jumper"
+                        <el-pagination background layout="total, prev, pager, next"
                             @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageIndex"
                             :page-size="pageSize" :page-sizes="[2, 4, 6, 10]" :total="total">
                         </el-pagination>
@@ -341,7 +345,7 @@ import Article from '../../components/Article.vue'
 document.title = `最新发布-施志标`
 
 const pageIndex = ref(1); // 第几页
-const pageSize = ref(8); // 每页几条数据
+const pageSize = ref(16); // 每页几条数据
 const total = ref(0); // 总条目数
 const allTableData = ref([]); // 所有的数据
 const showTableData = ref([]); // 当前展示的数据

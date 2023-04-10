@@ -52,6 +52,8 @@ function go(id) {
     transition: all 0.3s;
     // 垂直居中
     align-items: center;
+    // 超出隐藏
+    overflow: hidden;
 
     .cover {
         width: 12rem;
@@ -60,6 +62,7 @@ function go(id) {
         border-radius: 0.5rem;
         border: 1px solid var(--border);
         overflow: hidden;
+        flex-shrink: 0;
     }
 
     &:hover {
@@ -73,17 +76,22 @@ function go(id) {
             color: var(--blue);
         }
     }
-
     .info {
         display: flex;
         flex-direction: column;
         gap: 1rem;
 
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            // 不换行
+            white-space: nowrap;
+        }
         .info_twoRow {
             color: var(--text-3);
             display: flex;
             gap: 1rem;
-
+            white-space: nowrap;
             .time {
                 display: flex;
                 align-items: center;
@@ -98,15 +106,12 @@ function go(id) {
 
         }
 
-        .title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
 
         .tags {
             display: flex;
             gap: 0.5rem;
             color: var(--text-3);
+            white-space: nowrap;
         }
     }
 }
