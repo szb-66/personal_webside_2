@@ -72,7 +72,7 @@ document.title = '首页-施志标'
 
     }
     .el-row {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         margin-left: -10px;
         margin-right: -10px;
     }
