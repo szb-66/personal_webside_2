@@ -1,6 +1,6 @@
 <template>
     <div class="zhaoPian">
-        <img src="/images/zhaoPian.png" alt="">
+        <!-- 照片作为背景 -->
     </div>
 </template>
 
@@ -9,17 +9,13 @@
 </script>
 
 <style lang="less" scoped>
-.zhaoPian{
+.zhaoPian {
     height: 100%;
     border-radius: 1rem;
     border: 1px solid var(--border);
     overflow: hidden;
-
-    img{
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
+    background-image: url('/images/zhaoPian.jpg');
+    background-size: cover;
+    background-position: center;
 }
-
 </style>
