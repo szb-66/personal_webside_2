@@ -307,19 +307,22 @@
                     <div class="articleList">
                         <div class="newTitle">最新发布</div>
                         <!-- 文章列表 -->
-                        <div>
-                            <el-row :gutter="16">
-                                <el-col :span="12" v-for="(item, index) in showTableData" :key="index" >
-                                    <Article :article="item">
-                                    </Article>
-                                </el-col>
-                            </el-row>
+                        <div v-if="!loading">
+                            <div>
+                                <el-row :gutter="16">
+                                    <el-col :span="12" v-for="(item, index) in showTableData" :key="index">
+                                        <Article :article="item">
+                                        </Article>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                            <!-- 分页器 -->
+                            <el-pagination background layout="total, prev, pager, next" @size-change="handleSizeChange"
+                                @current-change="handleCurrentChange" :current-page="pageIndex" :page-size="pageSize"
+                                :page-sizes="[2, 4, 6, 10]" :total="total">
+                            </el-pagination>
                         </div>
-                        <!-- 分页器 -->
-                        <el-pagination background layout="total, prev, pager, next"
-                            @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageIndex"
-                            :page-size="pageSize" :page-sizes="[2, 4, 6, 10]" :total="total">
-                        </el-pagination>
+                        <Loading v-if="loading"></Loading>
                     </div>
                 </el-col>
                 <!-- 右边 -->
@@ -341,9 +344,11 @@ import About from '../../components/about.vue'
 import Tags from '../../components/tags.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
+import Loading from '../../components/Loading.vue'
 
 document.title = `最新发布-施志标`
 
+const loading = ref(true) // 加载中
 const pageIndex = ref(1); // 第几页
 const pageSize = ref(16); // 每页几条数据
 const total = ref(0); // 总条目数
@@ -356,6 +361,10 @@ onMounted(async () => {
         .then(res => {
             allTableData.value = res.data;
             // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
+            document.title = '设计知识库-施志标'
+            setTimeout(() => {
+                loading.value = false
+            }, 500)
         })
         .catch(err => {
             console.log(err);

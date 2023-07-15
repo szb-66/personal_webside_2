@@ -4,31 +4,29 @@
             <li v-for="(type, index) in types" :key="index" @click="getArticles(type, index)"
                 :class="{ active: currentModule === index }">{{ type }}</li>
         </ul>
-
         <el-row :gutter="16">
-            <el-col :span="12" v-for="(article, index) in articleList" :key="index" style="margin-bottom: 1rem;">
+            <el-col v-if="!loading" :span="12" v-for="(article, index) in articleList" :key="index" style="margin-bottom: 1rem;">
                 <ArticleCard :article="article"></ArticleCard>
             </el-col>
+            <Loading v-if="loading"></Loading>
         </el-row>
     </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import ArticleCard from './card.vue'
 import axios from 'axios'
+import Loading from '../../components/Loading.vue'
 
-
+const loading = ref(true) // 加载中
 const types = ref(null);// 文章类型
 const articleList = ref([]);// 文章列表
 const currentModule = ref(0)// 选中的id
 
-onMounted(() => {
-    getTypes();
-});
-
-// 获取分类
-async function getTypes() {
+onMounted(async() => {
+    // 获取分类
     try {
         const response = await axios.get('https://szb.design:3000/api/types/byWeight');
         types.value = response.data.map(item => item.type)
@@ -36,16 +34,22 @@ async function getTypes() {
     } catch (error) {
         console.error('获取类型失败：', error);
     }
-}
+});
+
 
 // 获取分类中的文章信息
 async function getArticles(type, index) {
+    loading.value = true
     try {
         const response = await axios.get('https://szb.design:3000/api/articles/info', {
             params: { type }
         });
         articleList.value = response.data;
+        setTimeout(() => {
+            loading.value = false
+        },500)
 
+        
     } catch (error) {
         console.error('获取文章失败：', error);
     }
@@ -53,6 +57,7 @@ async function getArticles(type, index) {
         currentModule.value = index
     }
 }
+
 
 // 刷新或进入页面自动获取已经选中的type数据
 watch(() => types.value, (newValue) => {
@@ -109,5 +114,11 @@ watch(() => types.value, (newValue) => {
             color: var(--white);
         }
     }
+}
+</style>
+
+<style>
+.example-showcase .el-loading-mask {
+  z-index: 9;
 }
 </style>

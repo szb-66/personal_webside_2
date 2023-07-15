@@ -36,7 +36,7 @@
             <el-col :span="15" class="col">
                 <XinXi></XinXi>
             </el-col>
-            <el-col :span="9">
+            <el-col :span="9" class="col">
                 <ZhaoPian></ZhaoPian>
             </el-col>
         </el-row>

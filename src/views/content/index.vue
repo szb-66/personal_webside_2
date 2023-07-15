@@ -24,13 +24,18 @@
             </div>
         </TitleBar>
         <div class="main">
-            <!-- el栅格系统 -->
             <el-row :gutter="16">
+                <!-- 左边 -->
                 <el-col :span="19">
+                    <!-- 文章内容 -->
                     <div class="content_bg">
-                        <div v-html="article.content" class="content" @scroll="onScroll" ref="content"></div>
+                        <div v-if="!loading" v-html="article.content" class="content" @scroll="onScroll" ref="content"></div>
+                        <Loading v-if="loading"></Loading>
                     </div>
+                    <!-- 推荐文章 -->
+                    <Recommend></Recommend>
                 </el-col>
+                <!-- 右边 -->
                 <el-col :span="5">
                     <About></About>
                     <RecentArticle style="margin-top: 1rem;"></RecentArticle>
@@ -52,11 +57,14 @@ import TitleBar from './TitleBar.vue'
 import About from '../../components/about.vue'
 import Catalog from './Catalog2.vue'
 import RecentArticle from '../../components/RecentArticle.vue';
+import Recommend from './Recommend.vue';
+import Loading from '../../components/Loading.vue'
 
 // 接受路由传过来的id
 const route = useRoute()
 const id = route.params.id
 
+const loading = ref(true) // 加载中
 const article = ref({})// 文章
 const catalog = ref([])// 目录
 const processedContent = ref('loading')// 显示的文章内容
@@ -67,6 +75,7 @@ provide('visibleSectionId', visibleSectionId)
 
 watch(() => route.params.id, async (newId, oldId) => {
     if (newId !== oldId) {
+        loading.value = true
         const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${newId}`);
         catalog.value = buildTree(response.data);
 
@@ -74,6 +83,9 @@ watch(() => route.params.id, async (newId, oldId) => {
         article.value = res.data;
 
         document.title = `${article.value.title}-施志标`
+        setTimeout(() => {
+            loading.value = false
+        }, 500)
     }
 }, {
     immediate: true,
@@ -192,10 +204,10 @@ const handleScroll = () => {
     max-width: 1440px;
 
     .content_bg {
-        margin: 0 auto;
+        margin: 0 auto 1rem;
         padding: 2rem 3rem;
         background-color: #fff;
-        border-radius: 10px;
+        border-radius: 1rem;
         line-height: 180%;
         border: 1px solid var(--border);
     }
@@ -204,6 +216,7 @@ const handleScroll = () => {
 
 <style lang="less">
 .content_bg {
+
     h1,
     h2,
     h3,
@@ -220,14 +233,19 @@ const handleScroll = () => {
         height: auto;
         margin: 0.5rem auto;
         border-radius: 0.5rem;
+        // 未加载时占位
+        background-color: #f5f5f5;
+        min-height: 1rem;
     }
-    iframe{
+
+    iframe {
         // 居中对齐
         display: block;
         margin: 0 auto;
         width: 48vw;
         height: 27vw;
     }
+
     // 表格样式，圆角边框
     table {
         width: 100%;
@@ -239,22 +257,27 @@ const handleScroll = () => {
         text-align: center;
         overflow: auto;
         border-radius: 5px;
-        tbody{
-            tr{
+
+        tbody {
+            tr {
                 border-bottom: 1px solid #ebedf0;
-                &:last-child{
+
+                &:last-child {
                     border-bottom: none;
                 }
-                td{
+
+                td {
                     padding: 0.5rem 0.75rem;
                     border-right: 1px solid #ebedf0;
-                    &:last-child{
+
+                    &:last-child {
                         border-right: none;
                     }
                 }
             }
         }
     }
+
     // 代码块
     pre {
         background-color: #f5f5f5;
@@ -263,5 +286,4 @@ const handleScroll = () => {
         margin: 1.5rem 0;
         overflow: auto;
     }
-}
-</style>
+}</style>

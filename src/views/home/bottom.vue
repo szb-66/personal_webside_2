@@ -66,7 +66,8 @@ function go(base){
 
         position: relative;
         overflow: hidden;
-
+        
+        box-shadow: var(--box-shadow);
 
         .text {
             font-size: 1rem;
