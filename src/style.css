@@ -46,6 +46,7 @@ body {
   min-height: 100vh;
   background-color: var(--bgc);
   position: relative;
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, Verdana, Helvetica, sans-serif;
 }
 
 /* 清除标题样式 */
