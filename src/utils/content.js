@@ -24,15 +24,45 @@ function parseFrontmatter(content) {
 
   const frontmatterBlock = match[1]
   const data = {}
+  let currentKey = null
+  let currentArray = []
 
-  frontmatterBlock.split('\n').forEach(line => {
-    const [key, ...valueParts] = line.split(':')
-    if (key && valueParts.length > 0) {
-      const value = valueParts.join(':').trim()
-      // 移除可能的引号
-      data[key.trim()] = value.replace(/^["']|["']$/g, '')
+  const lines = frontmatterBlock.split('\n')
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const trimmed = line.trim()
+
+    // 检查是否是数组项 (以 - 开头)
+    if (trimmed.startsWith('-')) {
+      const value = trimmed.substring(1).trim()
+      if (value) {
+        currentArray.push(value)
+      }
+    } else if (trimmed.includes(':')) {
+      // 保存之前的数组
+      if (currentKey && currentArray.length > 0) {
+        data[currentKey] = currentArray
+        currentArray = []
+      }
+
+      // 解析键值对
+      const colonIndex = trimmed.indexOf(':')
+      const key = trimmed.substring(0, colonIndex).trim()
+      const value = trimmed.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '')
+
+      if (key) {
+        currentKey = key
+        if (value) {
+          data[key] = value
+        }
+      }
     }
-  })
+  }
+
+  // 保存最后的数组
+  if (currentKey && currentArray.length > 0) {
+    data[currentKey] = currentArray
+  }
 
   const markdown = content.slice(match[0].length).trim()
   return { data, content: markdown }
@@ -54,7 +84,7 @@ function parseArticle(filePath, content) {
     title: data.title || slug,
     date: data.date || '',
     updated: data.updated || data.date || '',
-    tags: data.tags ? data.tags.split(',').map(t => t.trim()) : [],
+    tags: Array.isArray(data.tags) ? data.tags : (data.tags ? data.tags.split(',').map(t => t.trim()) : []),
     type: data.type || '',
     cover: data.cover || '',
     description: data.description || '',

@@ -3,9 +3,9 @@ title: 融e多后台管理系统
 tags:
   - 设计
 date: 2024-02-12
-type: 设计
+type: 项目复盘
 knowledge_base: design
-cover: /images/融e多后台管理系统/cover.png
+cover: /images/封面/融e多后台管理系统.png
 description: 无
 ---
 

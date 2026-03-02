@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/design/融e多后台管理系统.md",
+                "file": "src/content/项目复盘/融e多app.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "融e多后台管理系统"
+              "title": "融e多app"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/design/融e多后台管理系统.md",
+                "file": "src/content/项目复盘/融e多app.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "融e多后台管理系统 的反向链接列表"
+              "title": "融e多app 的反向链接列表"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/design/融e多后台管理系统.md",
+                "file": "src/content/项目复盘/融e多app.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "融e多后台管理系统 的出链列表"
+              "title": "融e多app 的出链列表"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/design/融e多后台管理系统.md",
+                "file": "src/content/项目复盘/融e多app.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "融e多后台管理系统 的大纲"
+              "title": "融e多app 的大纲"
             }
           }
         ]
@@ -186,28 +186,33 @@
   },
   "active": "bb4271a9021535d5",
   "lastOpenFiles": [
-    "dist/assets/index-5818a63d.js",
-    "dist/assets/index-9fa3ebe1.js",
-    "dist/assets/el-col-5ac01a38.js",
-    "dist/assets/el-select-0d45dbc6.js",
-    "dist/assets/about-664e1501.js",
-    "dist/assets/index-ac6bf13f.js",
-    "dist/assets/index-4c6f7d8d.js",
-    "dist/assets/index-61b93aa4.js",
-    "dist/assets/index-3cc98423.js",
-    "dist/assets/Article-03226699.js",
-    "dist/assets/Loading-703f0062.js",
-    "src/content/design/ui-principles.md",
-    "dist/images/文章图片/ec79c24ea295e7e2bfdf84735877c882_MD5.svg",
-    "dist/images/文章图片/e400bd1b7fa440b592a51045a79bdf26_MD5.svg",
-    "dist/images/文章图片/e032453bc7fa2b9fad0b5dfedbdf17e5_MD5.svg",
-    "dist/images/文章图片/dc99fcb4d2b5afee3de73d35c90893e4_MD5.svg",
-    "dist/images/文章图片/d8b4f46e2896b76b4dc107c4f361fc06_MD5.svg",
-    "dist/images/文章图片/c662e2ed906c52d9fcf06b50c9c18dda_MD5.svg",
-    "dist/images/文章图片/bf0c6be1c3071563a36433d1ff25e70a_MD5.svg",
-    "dist/images/文章图片/bb6fed8d1334554af23c42489dfb3202_MD5.svg",
-    "dist/images/文章图片/ae756043e655757124ddd50bf9a11c3a_MD5.svg",
-    "dist/images/文章图片/77075a9ee7fb6f35e075fc79e0db6050_MD5.svg",
+    "dist/assets/about-b9c8a066.js",
+    "dist/assets/index-ea9d471b.js",
+    "dist/assets/index-a4dd9adc.js",
+    "dist/assets/index-d7a2f12c.js",
+    "dist/assets/index-7f03ab1a.js",
+    "dist/assets/index-e84487cc.js",
+    "dist/assets/el-col-62b72efa.js",
+    "dist/assets/index-8d616872.js",
+    "dist/assets/el-select-3f15d4c4.js",
+    "dist/assets/RecentArticle-3dcad44d.js",
+    "dist/assets/Article-97dd4227.js",
+    "dist/images/文章图片/fd00b98db54dbda784f1a36221e97c0d_MD5.webp",
+    "dist/images/文章图片/ebe2f3a2d3d62b4b4e8c617e9e35f684_MD5.webp",
+    "dist/images/文章图片/d2a8b08ac77254dc0a3bdb424b7a8558_MD5.webp",
+    "dist/images/文章图片/d0a540bd845d4c8c695a104872c7becc_MD5.webp",
+    "dist/images/文章图片/c382854c63594cf9d96d788647589ceb_MD5.webp",
+    "dist/images/文章图片/b45a0ff15d13f84927a04530ecf787f4_MD5.webp",
+    "dist/images/文章图片/b1a228ec3652f6d223438623cb1fea91_MD5.webp",
+    "dist/images/文章图片/a0ea8905758ef4a4553398d779c17c67_MD5.webp",
+    "dist/images/文章图片/9c8fa4ff75a358828dcb5df13c518d14_MD5.webp",
+    "dist/images/文章图片/9ae80fad50af097b4a7179c3cd1c0796_MD5.webp",
+    "src/content/develop/css-grid.md",
+    "src/content/项目复盘/融e多app.md",
+    "src/content/项目复盘/融e多后台管理系统.md",
+    "文章模板/模板.md",
+    "README.md",
+    "src/content/develop/vue-reactivity.md",
     "node_modules/js-yaml/README.md",
     "node_modules/marked/README.md",
     "node_modules/marked/LICENSE.md",
@@ -226,11 +231,6 @@
     "node_modules/is-extendable/README.md",
     "openspec/changes/fix-import-path-issues/specs/import-path-validation/spec.md",
     "openspec/changes/fix-import-path-issues/tasks.md",
-    "openspec/changes/fix-import-path-issues/proposal.md",
-    "openspec/changes/fix-import-path-issues/design.md",
-    "node_modules/node-forge/README.md",
-    "node_modules/postcss-merge-longhand/README.md",
-    "node_modules/tapable/README.md",
-    "node_modules/nitropack/node_modules/mime/README.md"
+    "openspec/changes/fix-import-path-issues/proposal.md"
   ]
 }
