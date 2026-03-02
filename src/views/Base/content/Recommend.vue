@@ -17,7 +17,7 @@
 <script setup>
 import { ref, onMounted, watch, reactive } from 'vue'
 import axios from 'axios'
-import Article from '../../components/Article.vue'
+import Article from '../../../components/Article.vue'
 
 var options = {
     method: 'GET',

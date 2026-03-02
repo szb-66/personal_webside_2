@@ -1,0 +1,30 @@
+schema: spec-driven
+
+# 项目上下文
+# 创建 artifact 时会展示给 AI
+# 添加技术栈、代码规范、领域知识等
+context: |
+  技术栈: Vue 3, Vite, Element Plus, Vue Router, Axios, Less
+  项目类型: 个人简历/作品集网站
+  域名: 施志标的个人网站
+
+  代码规范:
+  - 使用 Vue 3 Composition API (<script setup>)
+  - 组件文件使用 .vue 扩展名
+  - 样式使用 Less 预处理器
+  - 使用 Element Plus 组件库
+
+  目录结构:
+  - src/components/ - 公共组件
+  - src/views/ - 页面视图
+  - src/router/ - 路由配置
+  - src/assets/ - 静态资源
+
+# 每个 artifact 的规则 (可选)
+# 为特定的 artifact 添加自定义规则
+rules:
+  proposal:
+    - 提案保持在 500 字以内
+    - 必须包含"非目标"部分
+  tasks:
+    - 将任务拆分成最大 2 小时的小块

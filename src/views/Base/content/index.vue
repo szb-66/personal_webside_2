@@ -54,11 +54,11 @@ import axios from 'axios';
 import { useRoute } from 'vue-router'
 import { ref, watch, onMounted, computed, provide, queuePostFlushCb } from 'vue'
 import TitleBar from './TitleBar.vue'
-import About from '../../components/about.vue'
+import About from '../../../components/about.vue'
 import Catalog from './Catalog2.vue'
-import RecentArticle from '../../components/RecentArticle.vue';
+import RecentArticle from '../../../components/RecentArticle.vue';
 import Recommend from './Recommend.vue';
-import Loading from '../../components/Loading.vue'
+import Loading from '../../../components/Loading.vue'
 
 // 接受路由传过来的id
 const route = useRoute()

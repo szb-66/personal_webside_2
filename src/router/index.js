@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/content/:id',
     name: 'content',
-    component: () => import('../views/content/index.vue')
+    component: () => import('../views/Base/content/index.vue')
   },
   {
     path: '/New',
