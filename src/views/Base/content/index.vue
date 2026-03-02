@@ -50,7 +50,6 @@
 
 
 <script setup>
-import axios from 'axios';
 import { useRoute } from 'vue-router'
 import { ref, watch, onMounted, computed, provide, queuePostFlushCb } from 'vue'
 import TitleBar from './TitleBar.vue'
@@ -59,6 +58,7 @@ import Catalog from './Catalog2.vue'
 import RecentArticle from '../../../components/RecentArticle.vue';
 import Recommend from './Recommend.vue';
 import Loading from '../../../components/Loading.vue'
+import { getArticleBySlug, markdownToHtml, parseCatalog, formatDate } from '@/utils/content'
 
 // 接受路由传过来的id
 const route = useRoute()
@@ -76,16 +76,22 @@ provide('visibleSectionId', visibleSectionId)
 watch(() => route.params.id, async (newId, oldId) => {
     if (newId !== oldId) {
         loading.value = true
-        const response = await axios.get(`https://szb.design:3000/api/articles/catalog/${newId}`);
-        catalog.value = buildTree(response.data);
 
-        const res = await axios.get(`https://szb.design:3000/api/articles/id/${newId}`);
-        article.value = res.data;
+        // 从本地 markdown 获取文章
+        const articleData = getArticleBySlug(newId)
+        if (articleData) {
+            article.value = {
+                ...articleData,
+                content: markdownToHtml(articleData.content),
+                created_at: formatDate(articleData.date)
+            }
+            catalog.value = parseCatalog(articleData.content)
+            document.title = `${articleData.title}-施志标`
+        }
 
-        document.title = `${article.value.title}-施志标`
         setTimeout(() => {
             loading.value = false
-        }, 500)
+        }, 100)
     }
 }, {
     immediate: true,

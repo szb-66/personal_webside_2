@@ -36,13 +36,13 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import About from '../../components/about.vue'
 import Tags from '../../components/Tags.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
 import Loading from '../../components/Loading.vue'
+import { getAllArticles, getArticlesByKnowledgeBase } from '@/utils/content'
 
 // 页面标题
 document.title = '知识库-施志标'
@@ -62,48 +62,24 @@ const url = ref('')
 
 // 异步数据请求
 onMounted(async () => {
-    if (base === 'design') {
-        await axios.get(`https://szb.design:3000/api/articles/knowledge_base`, {
-            params: { knowledge_base: '设计知识库' }
-        })
-            .then(res => {
-                allTableData.value = res.data;
-                // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
-                // 页面标题
-                document.title = '设计知识库-施志标'
-                setTimeout(() => {
-                    loading.value = false
-                }, 500)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        url.value = '/images/baseSheJi.png'
-    } else {
-        await axios.get(`https://szb.design:3000/api/articles/knowledge_base`, {
-            params: { knowledge_base: '开发知识库' }
-        })
-            .then(res => {
-                allTableData.value = res.data;
-                // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
-                document.title = '开发知识库-施志标'
-                setTimeout(() => {
-                    loading.value = false
-                }, 500)
-            })
-        url.value = '/images/baseKaiFa.png'
-
+    // 从本地 markdown 获取知识库文章
+    const kbMap = {
+        'design': { name: '设计', title: '设计知识库-施志标', img: '/images/baseSheJi.png' },
+        'develop': { name: '开发', title: '开发知识库-施志标', img: '/images/baseKaiFa.png' }
     }
 
+    const kb = kbMap[base] || kbMap['design']
+    allTableData.value = getArticlesByKnowledgeBase(base)
+    document.title = kb.title
+    url.value = kb.img
+
     setTimeout(() => {
-        // 3. 获取总条目数
+        // 获取总条目数
         total.value = allTableData.value.length;
-        // 4. 根据当前是第几页、每页展示几条，去截取需要展示的数据
+        // 截取需要展示的数据
         getShowTableData();
-    }, 1000);
-
-
-
+        loading.value = false
+    }, 100)
 });
 
 function getShowTableData() {

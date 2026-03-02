@@ -338,13 +338,13 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import About from '../../components/about.vue'
 import Tags from '../../components/Tags.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
 import Loading from '../../components/Loading.vue'
+import { getAllArticles } from '@/utils/content'
 
 document.title = `最新发布-施志标`
 
@@ -357,25 +357,12 @@ const showTableData = ref([]); // 当前展示的数据
 
 // 异步数据请求
 onMounted(async () => {
-    await axios.get(`https://szb.design:3000/api/articles/news`)
-        .then(res => {
-            allTableData.value = res.data;
-            // 属性：id, title, type, tags, created_at, updated_at, cover_img_url (按updated_at排序)
-            document.title = '设计知识库-施志标'
-            setTimeout(() => {
-                loading.value = false
-            }, 500)
-        })
-        .catch(err => {
-            console.log(err);
-        })
-
+    // 从本地 markdown 获取所有文章
+    allTableData.value = getAllArticles()
+    document.title = '设计知识库-施志标'
     setTimeout(() => {
-        // 3. 获取总条目数
-        total.value = allTableData.value.length;
-        // 4. 根据当前是第几页、每页展示几条，去截取需要展示的数据
-        getShowTableData();
-    }, 1000);
+        loading.value = false
+    }, 100)
 });
 
 function getShowTableData() {
@@ -408,7 +395,7 @@ function handleSizeChange(val) {
 
 <style lang="less" scoped>
 .bg {
-    background-image: url(../../assets/images/ArticleListBG.png);
+    background-image: url(/images/ArticleListBG.png);
     background-size: 100vw;
     // 背景高度
     height: 50vw;

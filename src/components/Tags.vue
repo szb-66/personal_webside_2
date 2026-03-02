@@ -7,24 +7,17 @@
 </template>
 
 <script setup>
-import axios from 'axios';
 import { useRoute,useRouter } from 'vue-router'
 import { ref, watch, onMounted, computed, provide, queuePostFlushCb } from 'vue'
+import { getTags } from '@/utils/content'
 
 const router = useRouter(); // 路由
 const tags = ref([]); // 标签信息
 
 // 异步数据请求
 onMounted(async () => {
-    // 获取tags信息
-    await axios.get(`https://szb.design:3000/api/tags`)
-        .then(res => {
-            // 属性：tag、count
-            tags.value = res.data;
-        })
-        .catch(err => {
-            console.log(err);
-        })
+    // 从本地 markdown 获取 tags
+    tags.value = getTags().map(item => ({ tag: item.name, count: item.count }))
 });
 
 function go(tag) {

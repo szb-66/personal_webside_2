@@ -39,12 +39,12 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref, onMounted, watch } from 'vue'
 import About from '../../components/about.vue'
 import RecentArticle from '../../components/RecentArticle.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
+import { getTags, getArticlesByTag } from '@/utils/content'
 
 document.title = `文章标签-施志标`
 
@@ -61,18 +61,11 @@ const allTableData = ref([]); // 所有的数据
 const showTableData = ref([]); // 当前展示的数据
 
 
-watch(() => route.params.tag, async (newTag, oldTag) => {
+watch(() => route.params.tag, (newTag, oldTag) => {
     if (newTag !== oldTag) {
-        try {
-            const response = await axios.get('https://szb.design:3000/api/articles/tag', {
-                params: { tag: newTag }
-            });
-            allTableData.value = response.data;
-            getShowTableData()
-            console.log(route.params.tag);
-        } catch (error) {
-            console.error('获取对应tag文章失败：', error);
-        }
+        // 从本地 markdown 获取标签对应的文章
+        allTableData.value = getArticlesByTag(newTag)
+        getShowTableData()
     }
 }, {
     immediate: true,
@@ -80,23 +73,14 @@ watch(() => route.params.tag, async (newTag, oldTag) => {
 });
 
 // 异步数据请求
-onMounted(async () => {
-    // 获取tags信息
-    await axios.get(`https://szb.design:3000/api/tags`)
-        .then(res => {
-            // 属性：tag、count
-            tags.value = res.data;
-        })
-        .catch(err => {
-            console.log(err);
-        })
+onMounted(() => {
+    // 从本地 markdown 获取 tags
+    tags.value = getTags().map(item => ({ tag: item.name, count: item.count }))
 
-    setTimeout(() => {
-        // 3. 获取总条目数
-        total.value = allTableData.value.length;
-        // 4. 根据当前是第几页、每页展示几条，去截取需要展示的数据
-        getShowTableData();
-    }, 1000);
+    // 获取总条目数
+    total.value = allTableData.value.length;
+    // 截取需要展示的数据
+    getShowTableData();
 });
 
 function getShowTableData() {

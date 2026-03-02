@@ -4,7 +4,7 @@
         <div class="main">
             <!-- 左边 -->
             <div class="left">
-                <img src="../assets/images/head.png" style=" width: 32px;">
+                <img src="/images/head.png" style=" width: 32px;">
                 <button @click="toPage('/home')">
                     <div :style="{ color: isTop && showWhite ? 'white' : '' }">首頁</div>
                 </button>
@@ -14,7 +14,7 @@
             </div>
             <!-- 右边 -->
             <div class="right">
-                <img src="../assets/images/yejianmoshi.png" style=" height: 24px;" @click="open" class="kaiGuan">
+                <img src="/images/yejianmoshi.png" style=" height: 24px;" @click="open" class="kaiGuan">
                 <a href="https://github.com/szb-66/personal-website" target="_blank" class="Github"></a>
             </div>
         </div>
@@ -115,7 +115,7 @@ watch(route, (to) => {
             .Github {
                 width: 28px;
                 height: 28px;
-                background-image: url('../assets/images/GitHub.png');
+                background-image: url('/images/GitHub.png');
                 background-size: 28px 28px;
             }
         }

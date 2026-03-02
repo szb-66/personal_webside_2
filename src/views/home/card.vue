@@ -1,8 +1,8 @@
 <template>
-    <div class="card" @click="goContent" :id="article.id">
+    <div class="card" @click="goContent">
         <!-- 封面 -->
         <div class="cover">
-            <img :src="article.cover_img_url" alt="封面图片" />
+            <img :src="article.cover" alt="封面图片" />
         </div>
         <!-- 文字内容 -->
         <div class="content">
@@ -16,15 +16,15 @@
                     </span>
                 </div>
                 <!-- 发布日期 -->
-                <div class="date">{{ article.created_at }}</div>
+                <div class="date">{{ formatDate(article.date) }}</div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script setup>
-import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
+import { formatDate } from '@/utils/content'
 const router = useRouter()
 
 // 获取父级传过来的卡片数据
@@ -37,7 +37,7 @@ const goContent = () => {
     router.push({
         name: 'content',
         params: {
-            id: props.article.id
+            id: props.article.slug
         }
     })
 }

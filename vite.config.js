@@ -6,6 +6,12 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+
   plugins: [
     vue(),
     AutoImport({
@@ -15,6 +21,10 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+
+  define: {
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
+  },
 
   server: {
     open: true,

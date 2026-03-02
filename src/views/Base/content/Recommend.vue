@@ -16,24 +16,11 @@
 
 <script setup>
 import { ref, onMounted, watch, reactive } from 'vue'
-import axios from 'axios'
 import Article from '../../../components/Article.vue'
+import { getRandomArticles } from '@/utils/content'
 
-var options = {
-    method: 'GET',
-    url: 'https://szb.design:3000/api/articles/idArray',
-    params: { idArray: '[489,141,475,487]' }
-};
-
-let articles = ref() //请求的数据
-
-//请求数据
-axios.request(options).then(function (response) {
-    articles.value = response.data;
-    console.log(articles);
-}).catch(function (error) {
-    console.error(error);
-});
+// 从本地 markdown 获取随机推荐文章
+let articles = ref(getRandomArticles(3))
 
 </script>
 

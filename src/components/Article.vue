@@ -1,6 +1,6 @@
 <template>
-    <div class="article" @click="go(article.id)">
-        <img :src="article.cover_img_url" class="cover">
+    <div class="article" @click="go(article.slug)">
+        <img :src="article.cover" class="cover">
         <div class="info">
             <div class="title">{{ article.title }}</div>
             <div class="info_twoRow">
@@ -8,7 +8,7 @@
                     <el-icon>
                         <Clock />
                     </el-icon>
-                    <span>{{ article.created_at }}</span>
+                    <span>{{ formatDate(article.date) }}</span>
                 </div>
                 <div class="type">
                     <el-icon>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="tags">
-                <div v-for="(tag, i) in article.tags" :id="i">
+                <div v-for="(tag, i) in article.tags" :key="i">
                     <span>#</span><span>{{ tag }}</span>
                 </div>
             </div>
@@ -28,6 +28,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { formatDate } from '@/utils/content'
 const router = useRouter()
 
 // 接收父组件传递的数据

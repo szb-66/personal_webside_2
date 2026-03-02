@@ -3,42 +3,38 @@
         <Transition name="fade">
             <div class="card-overlay" v-show="isHovering">
                         <div class="text3">随便逛逛</div>
-                        <img src="../../assets/images/go.png" class="img2">
+                        <img src="/images/go.png" class="img2">
             </div>
         </Transition>
         <div class="text">探索边界</div>
         <div class="text2">szb.design</div>
         <div class="img">
-            <img src="../../assets/images/app.png">
-            <img src="../../assets/images/app.png">
+            <img src="/images/app.png">
+            <img src="/images/app.png">
         </div>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { getRandomArticles } from '@/utils/content'
 const router = useRouter()
 
 let isHovering = ref(false);
 const randomId = ref(null);
 
 function go() {
-    axios.get(`https://szb.design:3000/api/randomId`)
-        .then(res => {
-            randomId.value = res.data[0].id;
-            console.log(randomId.value);
-            router.push({
-                name: 'content',
-                params: {
-                    id: randomId.value
-                }
-            })
+    // 从本地 markdown 获取随机文章
+    const articles = getRandomArticles(1)
+    if (articles.length > 0) {
+        router.push({
+            name: 'content',
+            params: {
+                id: articles[0].slug
+            }
         })
-        .catch(err => {
-            console.log(err);
-        })
+    }
 }
 
 </script>

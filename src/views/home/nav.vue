@@ -15,9 +15,9 @@
 
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import ArticleCard from './card.vue'
-import axios from 'axios'
+import { getAllArticles, getTypes } from '@/utils/content'
 import Loading from '../../components/Loading.vue'
 
 const loading = ref(true) // 加载中
@@ -26,45 +26,31 @@ const articleList = ref([]);// 文章列表
 const currentModule = ref(0)// 选中的id
 
 onMounted(async() => {
-    // 获取分类
-    try {
-        const response = await axios.get('https://szb.design:3000/api/types/byWeight');
-        types.value = response.data.map(item => item.type)
-        // console.log('获取类型成功：', response.data);
-    } catch (error) {
-        console.error('获取类型失败：', error);
+    // 获取分类 - 从本地 markdown 获取
+    types.value = getTypes()
+    // 获取第一类文章
+    if (types.value.length > 0) {
+        getArticles(types.value[0], 0)
+    } else {
+        loading.value = false
     }
 });
 
 
 // 获取分类中的文章信息
-async function getArticles(type, index) {
+function getArticles(type, index) {
     loading.value = true
-    try {
-        const response = await axios.get('https://szb.design:3000/api/articles/info', {
-            params: { type }
-        });
-        articleList.value = response.data;
-        setTimeout(() => {
-            loading.value = false
-        },500)
+    // 从本地 markdown 获取文章
+    const allArticles = getAllArticles()
+    articleList.value = allArticles.filter(article => article.type === type)
+    setTimeout(() => {
+        loading.value = false
+    }, 100)
 
-        
-    } catch (error) {
-        console.error('获取文章失败：', error);
-    }
-    if (types.value !== null) {
+    if (types.value && types.value.length > 0) {
         currentModule.value = index
     }
 }
-
-
-// 刷新或进入页面自动获取已经选中的type数据
-watch(() => types.value, (newValue) => {
-    if (newValue !== null) {
-        getArticles(newValue[0], 0);
-    }
-});
 
 </script>
 

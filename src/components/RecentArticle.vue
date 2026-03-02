@@ -8,11 +8,11 @@
         </div>
         <!-- 文章信息 -->
         <div class="articles">
-            <div class="article" v-for="(article, index) in articles" :id="index" @click="go(article.id)">
-                <img :src="article.cover_img_url" class="cover">
+            <div class="article" v-for="(article, index) in articles" :id="index" :key="index" @click="go(article.slug)">
+                <img :src="article.cover" class="cover">
                 <div class="articleInfo">
                     <div class="title2">{{ article.title }}</div>
-                    <div class="time">{{ article.created_at }}</div>
+                    <div class="time">{{ formatDate(article.date) }}</div>
                 </div>
             </div>
         </div>
@@ -21,26 +21,20 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { getLatestArticles, formatDate } from '@/utils/content'
 const router = useRouter()
-// 请求数据，https://127.0.0.1:3000/api/articles/news/five，返回最新的五条数据
+// 从本地 markdown 获取最新文章
 const articles = ref([])
-onMounted(async () => {
-    await axios.get(`https://szb.design:3000/api/articles/news/five`)
-        .then(res => {
-            articles.value = res.data
-        })
-        .catch(err => {
-            console.log(err)
-        })
+onMounted(() => {
+    articles.value = getLatestArticles(5)
 })
 
-function go(id) {
+function go(slug) {
     router.push({
         name: 'content',
         params: {
-            id: id
+            id: slug
         }
     })
 }
