@@ -341,7 +341,7 @@
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import About from '../../components/about.vue'
-import Tags from '../../components/tags.vue'
+import Tags from '../../components/Tags.vue'
 import { useRouter, useRoute } from 'vue-router'
 import Article from '../../components/Article.vue'
 import Loading from '../../components/Loading.vue'
