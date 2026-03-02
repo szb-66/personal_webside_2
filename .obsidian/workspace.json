@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/项目复盘/融e多app.md",
+                "file": "src/content/develop/未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "融e多app"
+              "title": "未命名"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/项目复盘/融e多app.md",
+                "file": "src/content/develop/未命名.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "融e多app 的反向链接列表"
+              "title": "未命名 的反向链接列表"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/项目复盘/融e多app.md",
+                "file": "src/content/develop/未命名.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "融e多app 的出链列表"
+              "title": "未命名 的出链列表"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/项目复盘/融e多app.md",
+                "file": "src/content/develop/未命名.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "融e多app 的大纲"
+              "title": "未命名 的大纲"
             }
           }
         ]
@@ -186,6 +186,9 @@
   },
   "active": "bb4271a9021535d5",
   "lastOpenFiles": [
+    "src/content/项目复盘/融e多app.md",
+    "src/content/develop/未命名.md",
+    "src/content/develop",
     "dist/assets/about-b9c8a066.js",
     "dist/assets/index-ea9d471b.js",
     "dist/assets/index-a4dd9adc.js",
@@ -195,8 +198,6 @@
     "dist/assets/el-col-62b72efa.js",
     "dist/assets/index-8d616872.js",
     "dist/assets/el-select-3f15d4c4.js",
-    "dist/assets/RecentArticle-3dcad44d.js",
-    "dist/assets/Article-97dd4227.js",
     "dist/images/文章图片/fd00b98db54dbda784f1a36221e97c0d_MD5.webp",
     "dist/images/文章图片/ebe2f3a2d3d62b4b4e8c617e9e35f684_MD5.webp",
     "dist/images/文章图片/d2a8b08ac77254dc0a3bdb424b7a8558_MD5.webp",
@@ -208,7 +209,6 @@
     "dist/images/文章图片/9c8fa4ff75a358828dcb5df13c518d14_MD5.webp",
     "dist/images/文章图片/9ae80fad50af097b4a7179c3cd1c0796_MD5.webp",
     "src/content/develop/css-grid.md",
-    "src/content/项目复盘/融e多app.md",
     "src/content/项目复盘/融e多后台管理系统.md",
     "文章模板/模板.md",
     "README.md",

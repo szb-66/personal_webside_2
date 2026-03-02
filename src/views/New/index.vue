@@ -361,6 +361,8 @@ onMounted(async () => {
     allTableData.value = getAllArticles()
     document.title = '设计知识库-施志标'
     setTimeout(() => {
+        total.value = allTableData.value.length;
+        getShowTableData();
         loading.value = false
     }, 100)
 });

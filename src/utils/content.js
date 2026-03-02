@@ -72,11 +72,14 @@ function parseFrontmatter(content) {
 function parseArticle(filePath, content) {
   const { data, content: markdown } = parseFrontmatter(content)
 
-  // 从文件路径提取 slug 和分类
+  // 从文件路径提取 slug
   // /src/content/develop/vue-basics.md -> develop, vue-basics
   const relativePath = filePath.replace('/src/content/', '').replace('.md', '')
-  const [knowledgeBase, ...slugParts] = relativePath.split('/')
+  const [pathKnowledgeBase, ...slugParts] = relativePath.split('/')
   const slug = slugParts.join('/')
+
+  // 使用 frontmatter 中的 knowledge_base
+  const knowledgeBase = data.knowledge_base
 
   return {
     slug,
