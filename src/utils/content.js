@@ -177,7 +177,9 @@ export function getTypes() {
 function convertObsidianImageSyntax(markdown) {
   if (!markdown) return markdown
   return markdown.replace(/!\[\[([^\]]+)\]\]/g, (match, imagePath) => {
-    return `![](${imagePath})`
+    // 去掉 public/images/ 改为 /images/，使浏览器能正确访问
+    const fixedPath = imagePath.replace(/^public\/images\//, '/images/')
+    return `![](${fixedPath})`
   })
 }
 
