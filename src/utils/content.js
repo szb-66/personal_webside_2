@@ -84,7 +84,7 @@ function parseArticle(filePath, content) {
   return {
     slug,
     knowledgeBase,
-    title: data.title || slug,
+    title: slug,
     date: data.date || '',
     updated: data.updated || data.date || '',
     tags: Array.isArray(data.tags) ? data.tags : (data.tags ? data.tags.split(',').map(t => t.trim()) : []),
