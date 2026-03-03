@@ -27,7 +27,7 @@ const data = [
         title: "开发知识库",
         imgSrc: "/images/kaiFa.png",
         bgc: "linear-gradient(90deg, #FF6854 0%, #FF9147 100%)",
-        base: "developer"
+        base: "develop"
     },
     {
         title: "最新发布",

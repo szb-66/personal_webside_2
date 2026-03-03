@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/develop/未命名.md",
+                "file": "src/content/develop/面向对象.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
+              "title": "面向对象"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/develop/未命名.md",
+                "file": "src/content/develop/面向对象.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "未命名 的反向链接列表"
+              "title": "面向对象 的反向链接列表"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/develop/未命名.md",
+                "file": "src/content/develop/面向对象.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "未命名 的出链列表"
+              "title": "面向对象 的出链列表"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/develop/未命名.md",
+                "file": "src/content/develop/面向对象.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "未命名 的大纲"
+              "title": "面向对象 的大纲"
             }
           }
         ]
@@ -186,8 +186,12 @@
   },
   "active": "bb4271a9021535d5",
   "lastOpenFiles": [
+    "vite.config.js.timestamp-1772446013514.mjs",
+    "public/images/封面/面向对象.png",
+    "public/images/文章图片/7d5aa21a3ff51df5c0cef099b0cc12b7_MD5.png",
+    "public/images/文章图片/f72534e108544305faf1eb402829d2b1_MD5.png",
     "src/content/项目复盘/融e多app.md",
-    "src/content/develop/未命名.md",
+    "src/content/develop/面向对象.md",
     "src/content/develop",
     "dist/assets/about-b9c8a066.js",
     "dist/assets/index-ea9d471b.js",
@@ -205,9 +209,6 @@
     "dist/images/文章图片/c382854c63594cf9d96d788647589ceb_MD5.webp",
     "dist/images/文章图片/b45a0ff15d13f84927a04530ecf787f4_MD5.webp",
     "dist/images/文章图片/b1a228ec3652f6d223438623cb1fea91_MD5.webp",
-    "dist/images/文章图片/a0ea8905758ef4a4553398d779c17c67_MD5.webp",
-    "dist/images/文章图片/9c8fa4ff75a358828dcb5df13c518d14_MD5.webp",
-    "dist/images/文章图片/9ae80fad50af097b4a7179c3cd1c0796_MD5.webp",
     "src/content/develop/css-grid.md",
     "src/content/项目复盘/融e多后台管理系统.md",
     "文章模板/模板.md",
@@ -230,7 +231,6 @@
     "node_modules/marked/man/marked.1.md",
     "node_modules/is-extendable/README.md",
     "openspec/changes/fix-import-path-issues/specs/import-path-validation/spec.md",
-    "openspec/changes/fix-import-path-issues/tasks.md",
-    "openspec/changes/fix-import-path-issues/proposal.md"
+    "openspec/changes/fix-import-path-issues/tasks.md"
   ]
 }
