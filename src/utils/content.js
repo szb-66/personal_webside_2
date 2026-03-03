@@ -184,7 +184,16 @@ function convertObsidianImageSyntax(markdown) {
 // Markdown 转 HTML
 export function markdownToHtml(markdown) {
   const convertedMarkdown = convertObsidianImageSyntax(markdown)
-  return marked(convertedMarkdown)
+
+  // 配置 marked 使用自定义 renderer 生成 heading id
+  const renderer = new marked.Renderer();
+  renderer.heading = function({ text, depth }) {
+    // 直接使用标题文本作为 id，与 parseCatalog 保持一致
+    const id = text;
+    return `<h${depth} id="${id}">${text}</h${depth}>`;
+  };
+
+  return marked(convertedMarkdown, { renderer });
 }
 
 // 解析文章目录
@@ -199,21 +208,21 @@ export function parseCatalog(markdown) {
 
     if (h1Match) {
       headings.push({
-        id: `h1-${index}`,
+        id: h1Match[1], // 直接使用标题文本作为 id，与 marked 保持一致
         text: h1Match[1],
         level: 1,
         children: []
       })
     } else if (h2Match) {
       headings.push({
-        id: `h2-${index}`,
+        id: h2Match[1],
         text: h2Match[1],
         level: 2,
         children: []
       })
     } else if (h3Match) {
       headings.push({
-        id: `h3-${index}`,
+        id: h3Match[1],
         text: h3Match[1],
         level: 3,
         children: []

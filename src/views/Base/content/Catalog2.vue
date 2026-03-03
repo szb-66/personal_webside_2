@@ -38,8 +38,8 @@ const visibleSectionId = inject('visibleSectionId')
 
 // 添加点击事件
 function go(id) {
-    // 文章对应id的节点出现在屏幕
-    document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "center" });
+    // 文章对应id的节点出现在屏幕，顶部留出100px间距
+    document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // 判断是否显示

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/项目复盘/融e多后台管理系统.md",
+                "file": "src/content/develop/面向对象.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "融e多后台管理系统"
+              "title": "面向对象"
             }
           }
         ]
@@ -186,9 +186,16 @@
   },
   "active": "bb4271a9021535d5",
   "lastOpenFiles": [
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section/specs/catalog-anchor-jump/spec.md",
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section/specs/catalog-anchor-jump",
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section/tasks.md",
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section/specs",
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section/proposal.md",
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section/design.md",
+    "openspec/changes/archive/2026-03-03-catalog-scroll-to-section",
+    "src/content/项目复盘/融e多后台管理系统.md",
     "src/content/develop/面向对象.md",
     "src/content/项目复盘/融e多app.md",
-    "src/content/项目复盘/融e多后台管理系统.md",
     "openspec/changes/archive/2026-03-03-use-filename-as-title/specs/implementation-only.md",
     "openspec/changes/archive/2026-03-03-use-filename-as-title/tasks.md",
     "openspec/changes/archive/2026-03-03-use-filename-as-title/specs",
@@ -208,10 +215,7 @@
     "openspec/changes/archive/2026-03-03-optimize-asset-structure/specs",
     "openspec/changes/archive/2026-03-03-optimize-asset-structure/proposal.md",
     "openspec/changes/archive/2026-03-03-optimize-asset-structure/design.md",
-    "openspec/changes/archive/2026-03-03-optimize-asset-structure",
     "openspec/specs/asset-structure-optimization/spec.md",
-    "openspec/specs/asset-structure-optimization",
-    "vite.config.js.timestamp-1772446013514.mjs",
     "public/images/封面/面向对象.png",
     "public/images/文章图片/7d5aa21a3ff51df5c0cef099b0cc12b7_MD5.png",
     "public/images/文章图片/f72534e108544305faf1eb402829d2b1_MD5.png",
@@ -227,10 +231,6 @@
     "README.md",
     "src/content/develop/vue-reactivity.md",
     "node_modules/js-yaml/README.md",
-    "node_modules/marked/README.md",
-    "node_modules/marked/LICENSE.md",
-    "node_modules/gray-matter/README.md",
-    "node_modules/gray-matter/CHANGELOG.md",
-    "node_modules/argparse/README.md"
+    "node_modules/marked/README.md"
   ]
 }

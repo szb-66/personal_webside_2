@@ -232,6 +232,7 @@ const handleScroll = () => {
         line-height: 300%;
         font-weight: 600;
         // margin: 1.5rem 0 0;
+        scroll-margin-top: 70px;
     }
 
     img {
